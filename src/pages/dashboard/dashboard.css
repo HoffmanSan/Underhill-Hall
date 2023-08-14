@@ -1,0 +1,21 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+.event-type-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: white;
+    height: 30vh;
+    width: auto;
+}
+.dashboard-container a {
+    text-decoration: none;
+
+}
