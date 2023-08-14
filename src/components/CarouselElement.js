@@ -15,9 +15,9 @@ export default function CarouselElement({ imageData }) {
   return (
     <Carousel
         showThumbs={false}
-        showArrows={false}
+        showArrows={true}
         showStatus={false}
-        showIndicators={false}
+        showIndicators={true}
         autoPlay={true}
         interval="5000"
         infiniteLoop={true}

@@ -11,5 +11,44 @@
   width: 100%;
 }
 .carousel-container img {
-  height: 540px;
+  height: 500px;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1C1C1C;
+  width: 100%;
+  border-top: 1px solid #4E4E4E;
+  border-bottom: 1px solid #4E4E4E;
+}
+.footer-links li{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  text-decoration: none;
+  color: grey;
+  cursor: pointer;
+}
+.footer-links li:hover {
+  filter: invert(94%) sepia(94%) saturate(24%) hue-rotate(341deg) brightness(105%) contrast(105%);
+}
+.footer-links img {
+  margin-top: 5px;
+  filter: invert(53%) sepia(2%) saturate(9%) hue-rotate(343deg) brightness(94%) contrast(86%);
+}
+.footer-sponsors {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid #4E4E4E;
+}
+.footer-sponsors img {
+  padding: 10px;
+  border-radius: 40px;
+  filter: brightness(70%);
+}
+.footer-paragraph {
+  text-align: center;
+  color: #4E4E4E;
+  padding: 5px;
 }

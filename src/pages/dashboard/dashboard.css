@@ -3,19 +3,45 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
-    width: 100%;
-    padding: 10px;
+    width: 80%;
 }
 .event-type-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: grey;
+    background: radial-gradient(grey,black 90%);
+    border-radius: 30px;
     color: white;
     height: 30vh;
     width: auto;
 }
+.Concerts {
+    background-image: url('../../assets/event-cards-bgc/concert-bgc.png');
+}
+.Theatre {
+    background-image: url('../../assets/event-cards-bgc/theatre-bgc.png');
+}
+.Science {
+    background-image: url('../../assets/event-cards-bgc/science-bgc.png');
+}
+.Opera {
+    background-image: url('../../assets/event-cards-bgc/opera-bgc.png')
+}
+.Ballet {
+    background-image: url('../../assets/event-cards-bgc/ballet-bgc.png');
+}
+.Kids {
+    background-image: url('../../assets/event-cards-bgc/kids-bgc.jpg');
+}
+.Cinema {
+    background-image: url('../../assets/event-cards-bgc/cinema-bgc.png');
+}
+.Art, .Exhibition {
+    background-image: url('../../assets/event-cards-bgc/art-bgc.png');
+}
+.event-type-card:hover {
+    font-size: 25px;
+}
 .dashboard-container a {
     text-decoration: none;
-
 }

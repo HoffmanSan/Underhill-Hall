@@ -1,9 +1,51 @@
 .event-list {
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
 }
-.paragraph {
-    background-color: blue;
-    height: 50px;
-    width: 50px;
+.event-card {
+    display: grid;
+    grid-template-columns: auto 3fr;
+    color: grey;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    margin: 20px;
+    width: 60%;
 }
+.card-poster, .card-details {
+    padding: 10px;
+}
+.card-details h3,p {
+    margin: 5px 0 5px 0;
+}
+.card-details h3 {
+    font-size: 32px;
+    color: white;
+}
+.card-details ul {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    padding-left: 0;
+}
+.card-details li:first-child {
+    padding-left: 0;
+}
+.card-details li {
+    padding: 0 10px 0 10px;
+    border-right: 1px solid grey;
+}
+.card-details li:last-child{
+    border-right: none;
+    padding-right: 0;
+}
+/* .card-details button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border-color: white;
+    font-size: 15px;
+    color: white;
+    background-color: black;
+} */
