@@ -9,7 +9,7 @@ export default function Dashboard({ eventTypes }) {
     <div className="dashboard-container">
         {eventTypes.map(type => (
             <NavLink to={`events/${type}`} key={type}>
-              <div className="event-type-card">
+              <div className={`event-type-card ${type}`}>
                 <h2>{type}</h2>
               </div>
             </NavLink>

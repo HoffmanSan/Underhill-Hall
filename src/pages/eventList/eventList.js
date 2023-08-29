@@ -27,8 +27,20 @@ export default function EventList() {
   return (
     <div className="event-list">
       {events && events.map(event => (
-        <div key={event.id} className="paragraph">
-          <p>{event.eventName}</p>
+        <div key={event.id} className="event-card">
+          <div className="card-poster">
+            <img height="300px" width="300px" src={event.posterURL} alt={`${event.eventName} poster`} />
+          </div>
+          <div className="card-details">
+            <h3>{event.eventName}</h3>
+            <ul>
+              <li><p>{event.performer}</p></li>
+              <li><p>{event.date}</p></li>
+              <li><p>{event.duration} min</p></li>
+            </ul>
+            <p>{event.eventDescription}</p>
+          </div>
+          
         </div>
       ))}
     </div>
