@@ -2,26 +2,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // styles
-import './App.css'
+import './App.scss'
 
-// components & pages
-import Navbar from './components/Navbar'
-import EventList from './pages/eventList/eventList'
-import Dashboard from './pages/dashboard/dashboard'
+// components
+import Navbar from './components/Navbar';
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
+import EventList from './components/EventList';
+import AboutUs from './components/AboutUs';
+import ContactUs from './components/ContactUs';
+
 
 // logos & icons
-import Petropo from './assets/sponsorsLogo/Petropo-logos.jpeg'
-import Redag from './assets/sponsorsLogo/REDAG development-logos.jpeg'
-import Werqu from './assets/sponsorsLogo/Werqu Incorporado-logos.jpeg'
-import Ahs from './assets/sponsorsLogo/AHS-logos.jpeg'
-import Facebook from './assets/socialMediaIcons/icon_fb.png'
-import Twitter from './assets/socialMediaIcons/icon_twitter.png'
-import LinkedIn from './assets/socialMediaIcons/icon_linkedin.png'
-import Instagram from './assets/socialMediaIcons/icon_instagram.png'
+import { Petropo, Redag, Werqu, Ahs } from './assets/sponsors-logos/index';
+import { Facebook, Twitter, LinkedIn, Instagram } from './assets/social-media-icons/index';
 
-const eventTypes = ["Concerts", "Theatre", "Science", "Ballet", "Cabaret", "Opera", "Cinema", "Kids", "Art Exhibitions"];
 
-const socialMedia = [
+const EVENT_TYPES = ["Concerts", "Theatre", "Science", "Ballet", "Stand-up", "Opera", "Cinema", "Kids", "Art Exhibitions"];
+
+const SOCIAL_MEDIA = [
   { name: "Facebook", iconSource: Facebook },
   { name: "Twitter", iconSource: Twitter },
   { name: "Instagram", iconSource: Instagram },
@@ -32,28 +31,32 @@ function App() {
 
   const handleClick = (mediaName) => {
     window.open(`https://${mediaName}.com`, '_blank');
-  }
+  };
 
   return (
     <div className="App">
       <BrowserRouter>
-
+      <Navbar />
         <Routes>
-          <Route path="" element={<Dashboard eventTypes={eventTypes}/>}></Route>
+          <Route path="" element={<><Header /><Dashboard eventTypes={EVENT_TYPES}/></>}></Route>
           <Route path="events/:type" element={<EventList />}></Route>
+          <Route path="events/:type/:eventId" element={<EventList />}></Route>
+          <Route path="/about" element={<AboutUs />}></Route>
+          <Route path="/contact" element={<ContactUs />}></Route>
         </Routes>
       </BrowserRouter>
 
       {/* footer */}
       <div className="footer">
         <div className="footer-links">
+          <p className="footer-paragraph">Find us on social media:</p>
           <ul>
-            {socialMedia.map(media => (
+            {SOCIAL_MEDIA.map(media => (
               <li key={media.name} onClick={() => handleClick(media.name)}>
                 <img height="25px" width="25px" src={media.iconSource} alt={`${media.name} icon`}/>
                 <p>{media.name}</p>
               </li>
-            ))};
+            ))}
           </ul>
         </div>
         <p className="footer-paragraph">Our sponsors: </p>
@@ -67,6 +70,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
