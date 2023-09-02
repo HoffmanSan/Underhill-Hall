@@ -1,23 +1,17 @@
-// imports
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// Imports
+import { Routes, Route } from 'react-router-dom';
 
-// styles
+// Styles
 import './App.scss'
 
-// components
-import Navbar from './components/Navbar';
-import Header from './components/Header';
-import Dashboard from './components/Dashboard';
-import EventList from './components/EventList';
-import AboutUs from './components/AboutUs';
-import ContactUs from './components/ContactUs';
+// Components
+import { Navbar, Header, Dashboard, EventList, AboutUs, ContactUs, ReservationPanel }  from './components/index';
 
-
-// logos & icons
+// Logos & Icons
 import { Petropo, Redag, Werqu, Ahs } from './assets/sponsors-logos/index';
 import { Facebook, Twitter, LinkedIn, Instagram } from './assets/social-media-icons/index';
 
-
+// Unchanging objects
 const EVENT_TYPES = ["Concerts", "Theatre", "Science", "Ballet", "Stand-up", "Opera", "Cinema", "Kids", "Art Exhibitions"];
 
 const SOCIAL_MEDIA = [
@@ -28,27 +22,27 @@ const SOCIAL_MEDIA = [
 ];
 
 function App() {
-
+  // Social media navigation handling
   const handleClick = (mediaName) => {
     window.open(`https://${mediaName}.com`, '_blank');
   };
 
   return (
     <div className="App">
-      <BrowserRouter>
       <Navbar />
         <Routes>
           <Route path="" element={<><Header /><Dashboard eventTypes={EVENT_TYPES}/></>}></Route>
           <Route path="events/:type" element={<EventList />}></Route>
-          <Route path="events/:type/:eventId" element={<EventList />}></Route>
-          <Route path="/about" element={<AboutUs />}></Route>
-          <Route path="/contact" element={<ContactUs />}></Route>
+          <Route path="events/:type/:eventId/*" element={<ReservationPanel />}></Route>
+          <Route path="about" element={<AboutUs />}></Route>
+          <Route path="contact" element={<ContactUs />}></Route>
         </Routes>
-      </BrowserRouter>
 
-      {/* footer */}
+      {/* Footer */}
       <div className="footer">
         <div className="footer-links">
+
+          {/* Social media links */}
           <p className="footer-paragraph">Find us on social media:</p>
           <ul>
             {SOCIAL_MEDIA.map(media => (
@@ -59,6 +53,8 @@ function App() {
             ))}
           </ul>
         </div>
+
+        {/* Sponsors logos display */}
         <p className="footer-paragraph">Our sponsors: </p>
         <div className="footer-sponsors">
           <img height="150px" width="150px" src={Petropo} alt="sponsor logo: Petropo " />
@@ -66,6 +62,8 @@ function App() {
           <img height="150px" width="150px" src={Ahs} alt="sponsor logo: AHS" />
           <img height="150px" width="150px" src={Redag} alt="sponsor logo: REDAG development" />
         </div>
+
+        {/* Copyright note */}
         <p className="footer-paragraph">Copyright 2023</p>
       </div>
     </div>
