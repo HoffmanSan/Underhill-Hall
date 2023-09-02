@@ -34,7 +34,7 @@ export default function ContactUs() {
         setTimeout(() => {
             setEmailSent(false);
             setError(false);
-        }, 4000);
+        }, 5000);
     };
 
   return (
@@ -56,21 +56,29 @@ export default function ContactUs() {
 
             {/* Email sending form template */}
             <h1>Send us an email</h1>
-            <div className="form-layout">
-                <form ref={form} onSubmit={sendEmail}>
-                    <label htmlFor='u_name'><h3>Name</h3></label>
-                    <input type="text" name="user_name" id="u_name" onChange={(e) => setName(e.target.value)} value={name} autoComplete="off" required/>
-                    <label htmlFor='u_email'><h3>Email</h3></label>
-                    <input type="email" name="user_email" id="u_email" onChange={(e) => setEmail(e.target.value)} value={email} autoComplete="off" required/>
-                    <label htmlFor='u_message'><h3>Message</h3></label>
-                    <textarea name="message" id="u_message" onChange={(e) => setMessage(e.target.value)} value={message} autoComplete="off" required/>
-                    <input className="form-button" type="submit" value="Send" />
+                <form ref={form} onSubmit={sendEmail} autoComplete="off">
+
+                        <label htmlFor='u_name'>
+                            <h3>Name</h3>
+                        </label>
+                        <input type="text" name="user_name" id="u_name" onChange={(e) => setName(e.target.value)} value={name} required/>
+
+                        <label htmlFor='u_email'>
+                            <h3>Email</h3>
+                        </label>
+                        <input type="email" name="user_email" id="u_email" onChange={(e) => setEmail(e.target.value)} value={email} required/>
+
+                        <label htmlFor='u_message'>
+                            <h3>Message</h3>
+                        </label>
+                        <textarea name="message" id="u_message" onChange={(e) => setMessage(e.target.value)} value={message} required/>
+
+                        <input className="form-button" type="submit" value="Send" />
                 </form>
 
                 {/* Success | Error element render based on submit process outcome */}
-                {emailSent && <div className="email-popup">Email sent successfully</div>}
-                {error && <div className="error">Email sending failed <br />Please try again</div>}
-            </div>
+                {emailSent && <div className="success-popup">Email sent successfully</div>}
+                {error && <div className="error-popup">Email sending failed <br />Please try again</div>}
         </div>
     </div>
   )

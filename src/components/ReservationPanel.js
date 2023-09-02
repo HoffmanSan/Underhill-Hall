@@ -102,7 +102,7 @@ export default function EventClassic() {
 
           {/* Event poster */}
           <div className="card-poster">
-            <img fetchpriority="high" type="image/webp" rel="preload" src={event.posterURL} alt={`${event.eventName} poster`}/>
+            <img height="300" width="300" fetchpriority="high" type="image/webp" rel="preload" src={event.posterURL} alt={`${event.eventName} poster`}/>
           </div>
 
           {/* Event details */}
@@ -123,12 +123,12 @@ export default function EventClassic() {
         <div className="reservation-card">
           <h3>Make a reservation:</h3>
           <form onSubmit={(e) => handleReservation(e)}>
-            <label htmlFor="">Enter the e-mail address where you want to receive the reservation:</label>
-              <input value={email} type="email" name="email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor="rervation_email">Enter the e-mail address where you want to receive the reservation:</label>
+              <input value={email} type="email" id="rervation_email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
             
             <div className="chosen-seats-display">
               <p>Your seats:</p>
-              <p>{clickedSeats && (clickedSeats.sort()).map(seat => (`${seat}, `))}</p>
+              {clickedSeats.length !== 0 && <p>{clickedSeats.sort().map(seat => (`${seat} `))}</p>}
             </div>
             <button type="submit">Submit</button>
           </form>
