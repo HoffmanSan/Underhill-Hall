@@ -41,7 +41,7 @@ export default function EventList() {
 
             {/* Event poster */}
             <div className="card-poster">
-              <img src={event.posterURL} alt={`${event.eventName} poster`}/>
+              <img fetchpriority="high" type="image/webp" rel="preload" src={event.posterURL} alt={`${event.eventName} poster`}/>
             </div>
 
             {/* Event details */}

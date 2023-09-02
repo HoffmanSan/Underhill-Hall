@@ -9,7 +9,7 @@ export default function Dashboard({ eventTypes }) {
         <div className="row">
           {eventTypes.map(type => (
               <NavLink className='col-12-xs col-6-md col-3-lg' to={`events/${type}`} key={type}>
-                <div className={`card ${type}`}>
+                <div className="card">
                   <h2>{type}</h2>
                 </div>
               </NavLink>

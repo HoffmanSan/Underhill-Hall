@@ -70,9 +70,9 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
           <h3>STAGE</h3>
         </div>
 
-        <div className="sector-A">
+        <div className="sector">
           <div className="sector-name">
-            <p>SECTOR A</p>
+            <h3>SECTOR A</h3>
           </div>
           {sectorASeats.map(seat => (
           <button
@@ -88,9 +88,9 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
           ))}
         </div>
 
-        <div className="sector-B">
+        <div className="sector">
           <div className="sector-name">
-            <p>SECTOR B</p>
+            <h3>SECTOR B</h3>
           </div>
           {sectorBSeats.map(seat => (
           <button
