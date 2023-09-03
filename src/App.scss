@@ -1,6 +1,11 @@
-@use './sass/variables' as *;
-@use './sass/mixins' as *;
 
+.App {
+  @include flex-center-center;
+  flex-direction: column;
+  min-width: 100%;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
 // base utilities
 
 h1, h2, h3 {
