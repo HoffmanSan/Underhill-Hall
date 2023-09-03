@@ -1,5 +1,8 @@
-// imports
+// Imports
 import { NavLink } from 'react-router-dom';
+
+// Styles
+import './dashboard.scss';
 
 export default function Dashboard({ eventTypes }) {
   return (

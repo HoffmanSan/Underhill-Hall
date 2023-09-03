@@ -1,0 +1,16 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+
+.about {
+  @include gradient-background-horizontal;
+  width: 100%;
+
+  .about-container{
+    @include container;
+
+    p {
+      margin: 0;
+      padding-bottom: $base-padding*3;
+    }
+  }
+}

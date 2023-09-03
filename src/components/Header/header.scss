@@ -1,0 +1,40 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+
+.header {
+    width: 100%;
+  
+  .header-container {
+    @include container;
+    display: grid;
+    grid-template: repeat(3, 0.75fr) / 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+  
+    .h1-part-one {
+      @include flex-center-center;
+      grid-column: 1 / 4;
+      background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+      background-clip: text;
+      color: transparent
+    }
+  
+    .h1-part-two {
+      color: $quaternary;
+      font-size: 6rem;
+      @include flex-center-center;
+      grid-column: 2 / 6;
+    }
+  
+    .h1-part-three {
+      @include flex-center-center;
+      grid-column: 4 / 7;
+      background-image: linear-gradient(90deg, $gradient-color-two, $gradient-color-one);
+      background-clip: text;
+      color: transparent
+    }
+  }
+}

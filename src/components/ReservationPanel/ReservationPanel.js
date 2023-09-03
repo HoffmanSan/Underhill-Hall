@@ -1,12 +1,15 @@
 // Imports
-import { nanoid } from 'nanoid'
-import { useParams, } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { db } from '../firebase/config'
-import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore'
+import { nanoid } from 'nanoid';
+import { useParams, } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { db } from '../../firebase/config';
+import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
+
+// Styles
+import './reservationPanel.scss';
 
 // Components
-import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom} from './event-rooms/index';
+import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom} from '../EventRooms/index';
 
 export default function EventClassic() {
   const nanoID = nanoid();
@@ -56,20 +59,18 @@ export default function EventClassic() {
 
   // Adding picked seats to a 'staging area'
   const handleSeatPick = (seatRef) => {
-    const pickedSeats = [];
-    pickedSeats.push(seatRef);
     setClickedSeats(prevSeats => {
       if (prevSeats.includes(seatRef)) {
-        const newSeats = prevSeats.filter(seat => {
+        const uniqueSeats = prevSeats.filter(seat => {
           if (seat === seatRef) {
             return false;
           } else {
             return true;
           }});
-          return newSeats;
+          return uniqueSeats;
       } else {
-        const newSeats = prevSeats.concat(pickedSeats);
-        return newSeats;
+        const uniqueSeats = prevSeats.concat(seatRef);
+        return uniqueSeats;
       }});
   };
 

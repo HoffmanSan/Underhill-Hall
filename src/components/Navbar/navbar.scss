@@ -1,0 +1,33 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+
+.navbar {
+    width: 100%;
+    background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+  
+    ul {
+      @include container;
+      @include flex-center-center;
+      list-style: none;
+    }
+  
+    li {
+      padding: $base-padding;
+      text-align: center;
+  
+      a {
+        text-decoration: none;
+        color: $quaternary;
+  
+        &.active {
+          font-weight: bold;
+        }
+      }
+    }
+  
+    .logo {
+      margin-right: auto;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+}
