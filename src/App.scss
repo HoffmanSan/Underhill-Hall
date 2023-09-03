@@ -30,6 +30,7 @@ $base-margin: 0.5rem;
   background-image: linear-gradient($primary, $secondary);
 }
 
+
 .App {
   @include flex-center-center;
   flex-direction: column;
