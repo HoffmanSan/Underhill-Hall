@@ -1,0 +1,84 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/elements' as *;
+
+.reservation-panel {
+  width: 100%;
+
+  .reservation-panel-container {
+    @include container;
+    @include event-card;
+  }
+  
+  .form-container {
+    @include container;
+    @include flex-center-center;
+    display: flex;
+    justify-content: center;
+    padding: $base-padding*2 $base-padding*2.5;
+    
+    .reservation-card {
+      text-align: center;
+      border: 2px solid $tertiary;
+      border-radius: 15px;
+      padding: $base-padding;
+
+      form {
+        @include flex-center-center;
+        flex-direction: column;
+
+        label {
+          color: $tertiary;
+          padding: $base-padding;
+        }
+
+        input {
+          padding: $base-padding;
+          border-radius: 10px;
+          text-align: center;
+          font-family: Poppins;
+          font-size: 15px;
+          width: 70%;
+
+          &:hover {
+            background-color: lightgray;
+            cursor: default;
+          }
+        }
+
+        .chosen-seats-display {
+          @include flex-center-center;
+          flex-direction: column;
+          border: 1px solid $quaternary;
+          border-radius: 15px;
+          margin: $base-margin;
+          max-width: 40%;
+        }
+
+        p {
+          padding: $base-padding $base-padding*2;
+          margin: 0;
+        }
+
+        button {
+          font-size: 20px;
+          font-family: Poppins;
+          color: $quaternary;
+          border: solid 2px $quaternary;
+          background-color: transparent;
+          border-radius: 10px;
+          margin: 10px;
+          padding: 5px 10px;
+          cursor: pointer;
+
+          &:hover, &:focus {
+            color: $tertiary;
+            border: solid 2px $tertiary;
+            background-color: $secondary;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

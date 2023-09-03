@@ -1,4 +1,5 @@
-
+// Styles
+import './aboutUs.scss'
 
 export default function About() {
   return (

@@ -1,8 +1,11 @@
 // Imports
 import { useState, useEffect } from "react";
 
+// Styles
+import './classicRoom.scss';
+
 // Icons
-import { TakenSeatIcon, UntakenSeatIcon, PickedSeatIcon } from '../../assets/icons/index';
+import { TakenSeatIcon, UntakenSeatIcon, PickedSeatIcon } from '../../../assets/icons/index';
 
 const numberOfSeatsInOneSector = 100;
 
@@ -36,7 +39,7 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
   return (
     <div className="classic-room-layout">
 
-      {/* Reservation legend */}
+      {/* ------------------  Reservation legend  ------------------ */}
       <div className="legend">
         <div className="room-model-hidden">
           <p>Room Model</p>
@@ -62,10 +65,11 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
           </li>
         </ul>
       </div>
+      {/* ---------------------------------------------------------- */}
 
       <div className="container">
 
-        {/* Room layout */}
+        {/* ---------------------  Room layout  --------------------- */}
         <div className="stage">
           <h3>STAGE</h3>
         </div>
@@ -105,6 +109,7 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
           </button>
           ))}
         </div>
+        {/* --------------------------------------------------------- */}
         
       </div>
     </div>

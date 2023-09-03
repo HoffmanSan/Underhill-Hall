@@ -1,0 +1,100 @@
+@use '../../../sass/mixins' as *;
+@use '../../../sass/variables' as *;
+@use '../../../sass/elements' as *;
+
+.classic-room-layout {
+  @include gradient-background-horizontal;
+  width: 100%;
+
+  .legend {
+    @include flex-center-center;
+    flex-direction: column;
+    padding: 0;
+
+    h3 {
+      margin-top: $base-margin;
+      margin-bottom: 0;
+    }
+
+    .room-model-hidden {
+      @include flex-center-center;
+      flex-direction: column;
+
+      .room-model {
+        display: grid;
+        grid-template: 50px 100px / 100px 100px;
+        row-gap: 8px;
+        column-gap: 10px;
+
+        & * p {
+          color: $primary;
+          text-align: center;
+          margin: $base-margin;
+        }
+
+        .stage-model {
+          @include flex-center-center;
+          background-color: darkgray;
+          grid-area: 1 / 1 / 2 / 3;
+        }
+
+        .sector-A-model {
+          @include flex-center-center;
+          background-color: darkgray;
+          grid-area: 2 / 1 / 3 / 2;
+        }
+
+        .sector-B-model {
+          @include flex-center-center;
+          background-color: darkgray;
+          grid-area: 2 / 2 / 3 / 3;
+        }
+      }
+    }
+
+    ul {
+      @include flex-center-center;
+      padding: $base-padding;
+      border: 2px solid $quaternary;
+      border-radius: 15px;
+
+      li {
+        @include flex-center-center;
+
+        & * {
+        padding: $base-padding*0.75;
+        }
+      }
+    }
+  }
+
+  .container {
+    @include container;
+    display: grid;
+    grid-template: 0.75fr 2fr / 1fr 1fr;
+    column-gap: 10%;
+    padding: $base-padding*2.5;
+
+    .stage {
+      @include flex-center-center;
+      background-color: darkgray;
+      grid-column: 1 / 3;
+      
+      h3 {
+        font-size: 2rem;
+        color: $quaternary;
+      }
+    }
+
+    & .sector {
+      display: grid;
+      grid-template: repeat(11, 1fr) / repeat(10, 1fr);
+      @include sector-button;
+
+        .sector-name {
+        grid-column: 1 / 11;
+        text-align: center;
+      }
+    }
+  }
+}
