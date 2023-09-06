@@ -103,7 +103,7 @@ export default function EventClassic() {
 
           {/* Event poster */}
           <div className="card-poster">
-            <img height="300" width="300" fetchpriority="high" type="image/webp" rel="preload" src={event.posterURL} alt={`${event.eventName} poster`}/>
+            <img rel="preload" fetchpriority="high" as="image/webp" height="300" width="300" src={event.posterURL} alt={`${event.eventName} poster`}/>
           </div>
 
           {/* Event details */}
@@ -136,7 +136,6 @@ export default function EventClassic() {
         </div>
       </div>
       
-
       {/* Event room */}
         {roomChoice()}
     </div>
