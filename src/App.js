@@ -7,7 +7,7 @@ import './App.scss'
 // Components
 import { Navbar, Header, Dashboard, EventList, AboutUs, ContactUs, ReservationPanel, Footer }  from './components';
 
-
+// Never changing values
 const event_types = ["Concerts", "Theatre", "Science", "Ballet", "Stand-up", "Opera", "Cinema", "Kids", "Art Exhibitions"];
 
 function App() {

@@ -37,7 +37,7 @@ export default function ContactUs() {
 		setTimeout(() => {
 			setEmailSent(false);
 			setError(false);
-		}, 5000);
+		}, 4000);
 	};
 
   return (
@@ -49,7 +49,7 @@ export default function ContactUs() {
 			<div className="contact-options">
 				<div className="contact-hotline">
 					<h3>Hotline</h3>
-					<p>9am - 9pm <br /> monday - friday <br /><a href="tel:+48111222333">+48 111 222 333</a></p>
+					<p>9am - 9pm <br /> Monday - Friday <br /><a href="tel:+48111222333">+48 111 222 333</a></p>
 				</div>
 				<div className="contact-correspondence">
 					<h3>Correspondence</h3>
@@ -57,7 +57,7 @@ export default function ContactUs() {
 				</div>
 			</div>
 
-			{/* Email sending form template */}
+			{/* Email form template */}
 			<h1>Send us an email</h1>
 			<form ref={form} onSubmit={sendEmail} autoComplete="off">
 
@@ -76,7 +76,7 @@ export default function ContactUs() {
 				</label>
 				<textarea name="message" id="u_message" onChange={(e) => setMessage(e.target.value)} value={message} required/>
 
-				<input className="form-button" type="submit" value="Send" />
+				<button className="form-button" type="submit" value="Send">Send</button>
 			</form>
 
 			{/* Success / Error element render based on submit process outcome */}

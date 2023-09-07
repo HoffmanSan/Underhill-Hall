@@ -8,10 +8,13 @@ import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
 // Styles
 import './reservationPanel.scss';
 
+// Icons
+import { TakenSeatIcon, UntakenSeatIcon, PickedSeatIcon } from '../../assets/icons/index';
+
 // Components
 import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom} from '../EventRooms/index';
 
-export default function EventClassic() {
+export default function ReservationPanel() {
   const nanoID = nanoid();
   const { type, eventId } = useParams();
   const [clickedSeats, setClickedSeats] = useState([]);
@@ -35,6 +38,7 @@ export default function EventClassic() {
 
     const takenSeats = [];
     const seatReservations = [];
+
     const reservation = {
       "reservationEmail": email,
       "seatReference": clickedSeats,
@@ -57,7 +61,7 @@ export default function EventClassic() {
     setClickedSeats([]);
   };
 
-  // Adding picked seats to a 'staging area'
+  // Gathering all unique seats chosen by the user into a single state
   const handleSeatPick = (seatRef) => {
     setClickedSeats(prevSeats => {
       if (prevSeats.includes(seatRef)) {
@@ -80,17 +84,17 @@ export default function EventClassic() {
       case 'Theatre':
       case 'Opera':
       case 'Ballet':
-        return <ClassicRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats}/>
+        return <ClassicRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats ? event.takenSeats : []}/>
       case 'Science':
       case 'Stand-up':
-        return <AudienceRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats}/>
+        return <AudienceRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats ? event.takenSeats : []}/>
       case 'Cinema':
       case 'Kids':
-        return <MovieRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats}/>
+        return <MovieRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats ? event.takenSeats : []}/>
       case 'Concerts':
-        return <ConcertHall handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats}/>
+        return <ConcertHall handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats ? event.takenSeats : []}/>
       case 'Art Exhibitions':
-        return <ArtRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats}/>
+        return <ArtRoom handleClick={handleSeatPick} clickedSeats={clickedSeats} takenSeats={event.takenSeats ? event.takenSeats : []}/>
       default: 
         return Error('There is no such type of event available')
     };
@@ -121,19 +125,39 @@ export default function EventClassic() {
       </div>
 
       <div className="form-container">
-        <div className="reservation-card">
+        <div className="reservation-form">
           <h3>Make a reservation:</h3>
           <form onSubmit={(e) => handleReservation(e)}>
-            <label htmlFor="rervation_email">Enter the e-mail address where you want to receive the reservation:</label>
+            <label htmlFor="rervation_email">Enter an e-mail address for the reservation:</label>
               <input value={email} type="email" id="rervation_email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
             
             <div className="chosen-seats-display">
-              <p>Your seats:</p>
-              {clickedSeats.length !== 0 && <p>{clickedSeats.sort().map(seat => (`${seat} `))}</p>}
+              <h3>Your seats:</h3>
+              <div>
+                {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btns" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
+              </div>
             </div>
-            <button type="submit">Submit</button>
+            <button className="submit-button" type="submit">Submit</button>
           </form>
         </div>
+      </div>
+
+      <div className="legend">
+      <h3>Seats:</h3>
+        <ul>
+          <li>
+            <img src={UntakenSeatIcon} height="60px" width="47px" alt="Untaken Seat Icon" />
+            <p>Open</p>
+          </li>
+          <li>
+            <img src={TakenSeatIcon} height="60px" width="47px" alt="Untaken Seat Icon" />
+            <p>Taken</p>
+          </li>
+          <li>
+            <img src={PickedSeatIcon} height="60px" width="47px" alt="Picked Seat Icon" />
+            <p>Picked</p>
+          </li>
+        </ul>
       </div>
       
       {/* Event room */}

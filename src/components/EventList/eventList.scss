@@ -4,6 +4,9 @@
 .event-list {
   width: 100%;
   @include gradient-background-horizontal;
+  @include flex-center-center;
+  flex-direction: column;
+  justify-content: flex-start;
   min-height: 50vh;
 
   .event-list-heading {
@@ -12,8 +15,9 @@
     border-bottom: 1px solid;
     border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
 
-    h1 {
+    h2 {
       margin: $base-margin*2 0;
+      font-size: 2rem;
     }
   }
 
