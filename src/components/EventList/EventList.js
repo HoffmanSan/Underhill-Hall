@@ -9,6 +9,7 @@ import './eventList.scss';
 
 export default function EventList() {
   const navigate = useNavigate();
+  const [isPending, setIsPending] = useState(false);
 
   // URL parameters extraction
   const { type } = useParams();
@@ -18,6 +19,7 @@ export default function EventList() {
 
   useEffect(() => {
     const ref = collection(db, type);
+    setIsPending(true);
 
     getDocs(ref)
     .then(snapshot => {
@@ -26,16 +28,22 @@ export default function EventList() {
         results.push({ id: doc.id, ...doc.data() });
       });
       setEvents(results);
+      setIsPending(false);
     });
+
   }, [type]);
   
 
   return (
     <div className="event-list">
+      
       <div className="event-list-heading">
-        <h1>{type}</h1>
+        <h2>{type}</h2>
       </div>
-      <div className="event-list-container">
+      
+      {isPending && <p>Loading...</p>}
+      {!isPending && 
+        <div className="event-list-container">
         {events && events.map(event => (
           <div key={event.id} className="event-card">
             <div className="card-poster">
@@ -55,6 +63,7 @@ export default function EventList() {
         ))}
         {events.length === 0 &&  <div className="event-list-empty"><p>There are currently no events</p></div>}
       </div>
+      }
     </div>
   )
 }

@@ -1,5 +1,6 @@
 @use '../../sass/mixins' as *;
 @use '../../sass/variables' as *;
+@use 'sass:math';
 
 .reservation-panel {
   width: 100%;
@@ -12,15 +13,16 @@
   .form-container {
     @include container;
     @include flex-center-center;
-    display: flex;
-    justify-content: center;
-    padding: $base-padding*2 $base-padding*2.5;
+    margin: 0 auto;
+    margin-top: $base-margin;
+    border: 1px solid;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
     
-    .reservation-card {
+    .reservation-form {
+      @include container;
       text-align: center;
-      border: 2px solid $tertiary;
-      border-radius: 15px;
       padding: $base-padding;
+      padding: auto;
 
       form {
         @include flex-center-center;
@@ -37,7 +39,7 @@
           text-align: center;
           font-family: Poppins;
           font-size: 15px;
-          width: 70%;
+          width: 40%;
 
           &:hover {
             background-color: lightgray;
@@ -48,34 +50,90 @@
         .chosen-seats-display {
           @include flex-center-center;
           flex-direction: column;
-          border: 1px solid $quaternary;
-          border-radius: 15px;
-          margin: $base-margin;
-          max-width: 40%;
+          border: solid 2px;
+          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+          margin: $base-margin*2;
+          padding: $base-padding;
+          width: 40%;
+
+          h3 {
+            margin: $base-margin;
+          }
+
+          .chosen-seats-btns {
+            cursor: default;
+            font-weight: bold;
+            margin: math.div($base-margin, 2);
+            padding: $base-padding;
+            border: solid 2px;
+            border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+            color: $quaternary;
+            background: transparent;
+            width: 50px;
+          }
         }
 
         p {
+          color: $tertiary;
           padding: $base-padding $base-padding*2;
           margin: 0;
         }
 
-        button {
-          font-size: 20px;
-          font-family: Poppins;
+        .submit-button {
           color: $quaternary;
-          border: solid 2px $quaternary;
-          background-color: transparent;
-          border-radius: 10px;
-          margin: 10px;
-          padding: 5px 10px;
+          font-family: Poppins;
+          font-size: 1.25em;
+          border: solid 2px;
+          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+          padding: $base-padding $base-padding*2;
+          background: transparent;
+          margin: $base-margin;
           cursor: pointer;
-
-          &:hover, &:focus {
-            color: $tertiary;
-            border: solid 2px $tertiary;
-            background-color: $secondary;
-            cursor: pointer;
+          position: relative;
+          isolation: isolate;
+          outline: none;
+  
+          &::after{
+            content: '';
+            position: absolute;
+            z-index: -1;
+            background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+            inset: 0;
+            scale: 0 1;
+            transform-origin: right;
+            transition: scale 450ms;
           }
+  
+          &:hover::after,
+          &:focus-visible::after {
+            transform-origin: left;
+            scale: 1 1;
+          }
+        }
+      }
+    }
+  }
+  .legend {
+    @include flex-center-center;
+    flex-direction: column;
+
+    h3 {
+      margin: $base-margin;
+    }
+
+    ul {
+      @include flex-center-center;
+      padding: $base-padding;
+      border: 1px solid;
+      border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+      margin-top: 0;
+      margin-bottom: $base-margin*2;
+
+      li {
+        @include flex-center-center;
+
+        & * {
+        padding: $base-padding*0.75;
         }
       }
     }
