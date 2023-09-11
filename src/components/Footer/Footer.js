@@ -5,7 +5,6 @@ import './footer.scss';
 import { Petropo, Redag, Werqu, Ahs } from '../../assets/sponsors-logos/index';
 import { Facebook, Twitter, LinkedIn, Instagram } from '../../assets/social-media-icons/index';
 
-
 const social_media = [
   { name: "Facebook", iconSource: Facebook },
   { name: "Twitter", iconSource: Twitter },
@@ -36,7 +35,7 @@ export default function Footer() {
         </ul>
       </div>
 
-      {/* Sponsors logos display */}
+      {/* Sponsors logos */}
       <p className="footer-paragraph">Our sponsors: </p>
       <div className="footer-sponsors">
         <img height="150px" width="150px" src={Petropo} alt="sponsor logo: Petropo " />

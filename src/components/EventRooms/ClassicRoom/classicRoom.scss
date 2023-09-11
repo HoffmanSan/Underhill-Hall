@@ -45,7 +45,7 @@
   .container {
     @include container;
     display: grid;
-    grid-template: 0.25fr 1fr / 1fr 1fr;
+    grid-template: 1fr 3fr / 1fr 1fr;
     column-gap: 10%;
     padding: $base-padding*2.5 $base-padding $base-padding*2.5 $base-padding;
     border: 1px solid;
@@ -55,7 +55,7 @@
     .stage {
       @include flex-center-center;
       background-color: $quaternary;
-      grid-column: 1 / 3;
+      grid-area: 1 / 1 / 2 / 3;
       
       h3 {
         font-size: 2rem;

@@ -15,14 +15,16 @@ import { TakenSeatIcon, UntakenSeatIcon, PickedSeatIcon } from '../../assets/ico
 import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom} from '../EventRooms/index';
 
 export default function ReservationPanel() {
-  const nanoID = nanoid();
   const { type, eventId } = useParams();
+  const nanoID = nanoid();
   const [clickedSeats, setClickedSeats] = useState([]);
-  const [email, setEmail] = useState('');
-  
-  // Real time database document watching
   const [event, setEvent] = useState([]);
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  
 
+  // Real time database access
   useEffect(() => {
     const docRef = doc(db, type, eventId);
     const unsub = onSnapshot(docRef, snapshot => {
@@ -34,11 +36,18 @@ export default function ReservationPanel() {
   // Reservation Handling
   const handleReservation = (e) => {
     e.preventDefault();
-    const docRef = doc(db, type, eventId);
 
+    // Check if other user booked the seats in the meantime
+    if (clickedSeats.some(el => event.takenSeats.includes(el))) {
+      setStatus('error');
+      setStatusMessage("Some or all of the seats that you're trying to book are already taken. Please try again.");
+      return
+    };
+
+    // If above is false, continue reservation process
+    const docRef = doc(db, type, eventId);
     const takenSeats = [];
     const seatReservations = [];
-
     const reservation = {
       "reservationEmail": email,
       "seatReference": clickedSeats,
@@ -48,20 +57,25 @@ export default function ReservationPanel() {
 
     clickedSeats.map(seatRef => {
       return takenSeats.push(seatRef);
-    })
+    });
 
-    updateDoc(docRef,  {seatReservations: arrayUnion(...seatReservations), takenSeats: arrayUnion(...takenSeats)})
-      .then(
-        console.log('Reservation process succesful.')
-      )
+    // Database document update with reservation data
+    updateDoc(docRef, {seatReservations: arrayUnion(...seatReservations), takenSeats: arrayUnion(...takenSeats)})
+      .then(() => {
+        console.log('Reservation process succesful.');
+        setStatus('success');
+        setStatusMessage('Reservation process succesful. Booking confirmation has been sent to your email.');
+      })
       .catch(error => {
-        console.log('Reservation process failed. An error occured: ', error.message)
+        console.log('Reservation process failed. An error occured: ', error.message);
+        setStatus('error');
+        setStatusMessage('Reservation process failed, please try again.');
       });
     setEmail('');
     setClickedSeats([]);
   };
 
-  // Gathering all unique seats chosen by the user into a single state
+  // On click add/delete seats to/from clickedSeats state
   const handleSeatPick = (seatRef) => {
     setClickedSeats(prevSeats => {
       if (prevSeats.includes(seatRef)) {
@@ -103,6 +117,8 @@ export default function ReservationPanel() {
   return (
     <div className="reservation-panel">
       <div className="reservation-panel-container">
+
+        {/* Event card */}
         <div className="event-card">
 
           {/* Event poster */}
@@ -125,23 +141,28 @@ export default function ReservationPanel() {
       </div>
 
       <div className="form-container">
+
+        {/* Reservation making form */}
         <div className="reservation-form">
           <h3>Make a reservation:</h3>
           <form onSubmit={(e) => handleReservation(e)}>
+
             <label htmlFor="rervation_email">Enter an e-mail address for the reservation:</label>
-              <input value={email} type="email" id="rervation_email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
+            <input value={email} type="email" id="rervation_email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
             
             <div className="chosen-seats-display">
               <h3>Your seats:</h3>
               <div>
-                {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btns" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
+                {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btn" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
               </div>
             </div>
+
             <button className="submit-button" type="submit">Submit</button>
           </form>
         </div>
       </div>
 
+      {/* Seats description */}
       <div className="legend">
       <h3>Seats:</h3>
         <ul>
@@ -161,7 +182,7 @@ export default function ReservationPanel() {
       </div>
       
       {/* Event room */}
-        {roomChoice()}
+      {event.takenSeats ? roomChoice() : <p>Loading...</p>}
     </div>
   )
 }

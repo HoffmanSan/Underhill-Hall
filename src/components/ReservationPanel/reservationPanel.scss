@@ -4,6 +4,8 @@
 
 .reservation-panel {
   width: 100%;
+  @include flex-center-center;
+  flex-direction: column;
 
   .reservation-panel-container {
     @include container;
@@ -60,7 +62,7 @@
             margin: $base-margin;
           }
 
-          .chosen-seats-btns {
+          .chosen-seats-btn {
             cursor: default;
             font-weight: bold;
             margin: math.div($base-margin, 2);

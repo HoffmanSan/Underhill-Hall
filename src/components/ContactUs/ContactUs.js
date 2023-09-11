@@ -9,17 +9,16 @@ export default function ContactUs() {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
 	const [message, setMessage] = useState('')
-	const [emailSent, setEmailSent] = useState(false)
-	const [error, setError] = useState(false)
+	const [status, setStatus] = useState('')
 
-	// Form inputs reset after submiting
+	// Form inputs reset
 	const resetForm = () => {
 		setName('');
 		setEmail('');
 		setMessage('');
 	};
 
-	// EmailJS configuration
+	// EmailJS - email sending process
 	const form = useRef();
 
 	const sendEmail = (e) => {
@@ -28,23 +27,22 @@ export default function ContactUs() {
 		emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, form.current, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
 		.then((result) => {
 			console.log(result.text);
-			setEmailSent(true);
+			setStatus('success');
 		}, (error) => {
 			console.log(error.text);
-			setError(true);
+			setStatus('error');
 		});
 		resetForm();
 		setTimeout(() => {
-			setEmailSent(false);
-			setError(false);
-		}, 4000);
+			setStatus('');
+		}, 5000);
 	};
 
   return (
 	<div className="contact">
 		<div className="contact-container">
 
-			{/* Phone / Correspondence contact information */}
+			{/* Phone/Correspondence contact information */}
 			<h2>How can we help?</h2>
 			<div className="contact-options">
 				<div className="contact-hotline">
@@ -79,9 +77,9 @@ export default function ContactUs() {
 				<button className="form-button" type="submit" value="Send">Send</button>
 			</form>
 
-			{/* Success / Error element render based on submit process outcome */}
-			{emailSent && <div className="success-popup">Email sent successfully</div>}
-			{error && <div className="error-popup">Email sending failed <br />Please try again</div>}
+			{/* Success/Error element render based on submit process outcome */}
+			{status === 'success' && <div className="success-popup">Email sent successfully</div>}
+			{status === 'error' && <div className="error-popup">Email sending failed <br />Please try again</div>}
 		</div>
 	</div>
   )

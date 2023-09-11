@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './concertHall.scss';
 
 // Components
-import Sector from '../SectorLayout/Sector';
+import Sector from '../../SectorLayout/Sector';
 
 // Sector seats generating
 const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
@@ -17,11 +17,11 @@ const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
 };
 
 export default function ConcertHall({ handleClick, clickedSeats, takenSeats }) {
-  const [sectorASeats] = useState(() => generateSectorSeats('A', 200));
-  const [sectorBSeats] = useState(() => generateSectorSeats('B', 240));
-  const [sectorCSeats] = useState(() => generateSectorSeats('C', 200));
-  const [sectorDSeats] = useState(() => generateSectorSeats('D', 200));
-  const [sectorESeats] = useState(() => generateSectorSeats('E', 200));
+  const [sectorASeats] = useState(() => generateSectorSeats('A', 198));
+  const [sectorBSeats] = useState(() => generateSectorSeats('B', 288));
+  const [sectorCSeats] = useState(() => generateSectorSeats('C', 198));
+  const [sectorDSeats] = useState(() => generateSectorSeats('D', 198));
+  const [sectorESeats] = useState(() => generateSectorSeats('E', 198));
 
   return (
     <div className="concert-hall">

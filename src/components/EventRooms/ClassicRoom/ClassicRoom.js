@@ -5,9 +5,9 @@ import { useState } from "react";
 import './classicRoom.scss';
 
 // Components
-import Sector from '../SectorLayout/Sector';
+import Sector from '../../SectorLayout/Sector';
 
-// Sector seats generating function used as initial value in useState (called only on first render)
+// Sector seats generating
 const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
   const sectorSeats = [];
   for (let i = 1; i <= sectorSeatsQuantity; i++) {
