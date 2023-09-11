@@ -7,7 +7,9 @@ import './dashboard.scss';
 export default function Dashboard({ eventTypes }) {
   return (
     <div className="dashboard">
+
       <h2 className="dashboard-title">Upcoming Events</h2>
+      
       <div className="dashboard-container">
         <div className="row">
           {eventTypes.map(type => (
