@@ -4,6 +4,7 @@ import { useParams, } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase/config';
 import { doc, onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
+import emailjs from '@emailjs/browser';
 
 // Styles
 import './reservationPanel.scss';
@@ -12,14 +13,15 @@ import './reservationPanel.scss';
 import { TakenSeatIcon, UntakenSeatIcon, PickedSeatIcon } from '../../assets/icons/index';
 
 // Components
-import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom} from '../EventRooms/index';
+import { ArtRoom, AudienceRoom, ClassicRoom, ConcertHall, MovieRoom, EventCard, Modal } from '../../components/index';
 
 export default function ReservationPanel() {
-  const { type, eventId } = useParams();
   const nanoID = nanoid();
+  const { type, eventId } = useParams();
   const [clickedSeats, setClickedSeats] = useState([]);
   const [event, setEvent] = useState([]);
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [status, setStatus] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   
@@ -33,22 +35,30 @@ export default function ReservationPanel() {
     return () => unsub();
   }, [type, eventId]);
 
-  // Reservation Handling
+
+  // Reservation making process
   const handleReservation = (e) => {
     e.preventDefault();
 
-    // Check if other user booked the seats in the meantime
+    if (clickedSeats.length === 0) {
+      setStatus('error')
+      setStatusMessage('You forgot to pick a seat.')
+      return
+    }
+
+    // If the seats that user is trying to book are not open anymore - stop the process
     if (clickedSeats.some(el => event.takenSeats.includes(el))) {
       setStatus('error');
       setStatusMessage("Some or all of the seats that you're trying to book are already taken. Please try again.");
       return
     };
 
-    // If above is false, continue reservation process
+    // Otherwise - continue
     const docRef = doc(db, type, eventId);
     const takenSeats = [];
     const seatReservations = [];
     const reservation = {
+      "reservationName": name,
       "reservationEmail": email,
       "seatReference": clickedSeats,
       "reservationID": nanoID,
@@ -59,21 +69,36 @@ export default function ReservationPanel() {
       return takenSeats.push(seatRef);
     });
 
-    // Database document update with reservation data
+    // Update the database with reservation data
     updateDoc(docRef, {seatReservations: arrayUnion(...seatReservations), takenSeats: arrayUnion(...takenSeats)})
       .then(() => {
-        console.log('Reservation process succesful.');
+        console.log('Reservation process successful.');
         setStatus('success');
-        setStatusMessage('Reservation process succesful. Booking confirmation has been sent to your email.');
+        setStatusMessage("Reservation process successful. Booking confirmation has been sent to your email.");
       })
       .catch(error => {
         console.log('Reservation process failed. An error occured: ', error.message);
         setStatus('error');
         setStatusMessage('Reservation process failed, please try again.');
       });
+
+      const bookingConfirmation = {
+        "eventName": event.eventName,
+        "eventPerformer": event.performer,
+        "eventDate": event.date,
+        "reservationName": name,
+        "reservationEmail": email,
+        "seatReference": clickedSeats,
+        "reservationID": nanoID,
+      };
+
+      emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID_2, bookingConfirmation, process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
+
     setEmail('');
+    setName('');
     setClickedSeats([]);
   };
+
 
   // On click add/delete seats to/from clickedSeats state
   const handleSeatPick = (seatRef) => {
@@ -92,7 +117,11 @@ export default function ReservationPanel() {
       }});
   };
 
-  // Correct room render based on event type
+  const closeModal = () => {
+    setStatus('');
+  };
+
+  // Render the correct room layout based on event type
   const roomChoice = () => {
     switch (type) {
       case 'Theatre':
@@ -117,27 +146,7 @@ export default function ReservationPanel() {
   return (
     <div className="reservation-panel">
       <div className="reservation-panel-container">
-
-        {/* Event card */}
-        <div className="event-card">
-
-          {/* Event poster */}
-          <div className="card-poster">
-            <img rel="preload" fetchpriority="high" as="image/webp" height="300" width="300" src={event.posterURL} alt={`${event.eventName} poster`}/>
-          </div>
-
-          {/* Event details */}
-          <div className="card-details">
-            <h3>{event.eventName}</h3>
-            <ul>
-              <li><p>{event.performer}</p></li>
-              <li><p>{event.date}</p></li>
-              <li><p>{event.duration}</p></li>
-            </ul>
-            <p>{event.eventDescription}</p>
-          </div>
-          
-        </div>
+      <EventCard event={event} type={type} eventId={eventId} />
       </div>
 
       <div className="form-container">
@@ -147,12 +156,17 @@ export default function ReservationPanel() {
           <h3>Make a reservation:</h3>
           <form onSubmit={(e) => handleReservation(e)}>
 
+          <label htmlFor="rervation_name">Enter your name and surname:</label>
+            <input value={name} type="text" id="rervation_name" autoComplete="off" required onChange={(e) => setName(e.target.value)}/>
+
             <label htmlFor="rervation_email">Enter an e-mail address for the reservation:</label>
-            <input value={email} type="email" id="rervation_email" autoComplete="off" onChange={(e) => setEmail(e.target.value)}/>
+            <input value={email} type="email" id="rervation_email" autoComplete="off" required onChange={(e) => setEmail(e.target.value)}/>
             
+            {/* Displaying the seats that the user wants to book */}
             <div className="chosen-seats-display">
               <h3>Your seats:</h3>
               <div>
+                {/* If there are no clicked seats - display the paragraph, otherwise display the seats */}
                 {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btn" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
               </div>
             </div>
@@ -162,7 +176,7 @@ export default function ReservationPanel() {
         </div>
       </div>
 
-      {/* Seats description */}
+      {/* Seat types description */}
       <div className="legend">
       <h3>Seats:</h3>
         <ul>
@@ -181,8 +195,11 @@ export default function ReservationPanel() {
         </ul>
       </div>
       
-      {/* Event room */}
+      {/* Render the proper room after successful connection with the database */}
       {event.takenSeats ? roomChoice() : <p>Loading...</p>}
+
+      {/* Show modal after reservation process */}
+      {status !== "" && <Modal statusMessage={statusMessage} closeModal={closeModal} />}
     </div>
   )
 }

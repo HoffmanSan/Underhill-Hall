@@ -61,9 +61,8 @@
     .sector {
       display: grid;
       grid-template: repeat(11, 1fr) / repeat(10, 1fr);
-      @include sector-button;
 
-      > .sector-name {
+      .sector-name {
         grid-column: 1 / 11;
       }
 

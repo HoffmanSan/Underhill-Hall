@@ -77,7 +77,6 @@
     }
 
     .sector {
-      @include sector-button;
       display: grid;
 
       h3 {

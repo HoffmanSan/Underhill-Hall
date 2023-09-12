@@ -19,130 +19,36 @@
   background-image: linear-gradient($primary, $secondary);
 }
 
-@mixin event-card {
-  .event-card {
-    display: grid;
-    grid-template: auto / 1fr 3fr;
-    color: $tertiary;
-    border-top: 1px solid;
-    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+@mixin submit-button {
+  .submit-button {
+    color: $quaternary;
+    font-family: Poppins;
+    font-size: 1.25em;
+    border: solid 2px;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+    padding: $base-padding $base-padding*2;
+    background: transparent;
+    margin: $base-margin;
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    outline: none;
 
-    &:first-child {
-      border-top: none;
-    }
-
-    img {
-      padding: $base-padding $base-padding 0 $base-padding;
-    }
-    
-    .card-details {
-      padding: 0 $base-padding;
-      
-      h3 {
-        font-size: 32px;
-        margin: $base-margin 0 0 0;
-      }
-
-      p {
-        margin: $base-margin 0;
-      }
-
-      ul {
-        display: flex;
-        list-style: none;
-        padding-left: 0;
-        margin: $base-margin 0;
-      }
-
-      li {
-        padding: 0 $base-padding;
-        border-right: 1px solid $tertiary;
-      }
-
-      li:first-child {
-        padding-left: 0;
-      }
-
-      li:last-child{
-        border-right: none;
-        padding-right: 0;
-      }
-
-      .booking-button {
-        color: $quaternary;
-        font-family: Poppins;
-        font-size: 1.25em;
-        border: solid 2px;
-        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
-        padding: $base-padding $base-padding*2;
-        background: transparent;
-        margin: $base-margin;
-        cursor: pointer;
-        position: relative;
-        isolation: isolate;
-        outline: none;
-
-        &::after{
-          content: '';
-          position: absolute;
-          z-index: -1;
-          background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
-          inset: 0;
-          scale: 0 1;
-          transform-origin: right;
-          transition: scale 450ms;
-        }
-
-        &:hover::after,
-        &:focus-visible::after {
-          transform-origin: left;
-          scale: 1 1;
-        }
-      }
-    }
-  }
-}
-
-@mixin sector-button {
-  button {
-    margin: 0.5px;
-    padding: 0;
-    padding-top: 4px;
-    border: 1px solid $secondary;
-    border-radius: 0.5em;
-    background-color: #888888;
-    color: $primary;
-
-    svg {
-      filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(343deg) brightness(102%) contrast(101%);
-      height: 60%;
-      width: 60%;
-    }
-
-    &:hover {
-      background-color: $tertiary;
-      cursor: pointer;
-    }
-
-    &.taken {
-      background-color: $primary;
-      cursor: default;
-      border: 1px solid $tertiary;
-    }
-
-    &.clicked {
-      border: 1px solid $secondary;
-      border-radius: 0.5em;
+    &::after{
+      content: '';
+      position: absolute;
+      z-index: -1;
       background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+      inset: 0;
+      scale: 0 1;
+      transform-origin: right;
+      transition: scale 450ms;
     }
-  }
 
-  .sector-name {
-    grid-column: 1 / 11;
-    text-align: center;
-
-    p {
-      text-align: center;
+    &:hover::after,
+    &:focus-visible::after {
+      transform-origin: left;
+      scale: 1 1;
     }
   }
 }

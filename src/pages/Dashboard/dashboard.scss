@@ -4,7 +4,7 @@
 .dashboard {
   width: 100%;
   @include gradient-background-horizontal;
-  
+
   .dashboard-title {
     text-align: center;
     color: $quaternary;
@@ -20,6 +20,39 @@
     @include container;
     padding: $base-padding*2.5;
 
+    .dashboard-header {
+      display: grid;
+      grid-template: repeat(3, 0.75fr) / 1fr 1fr 1fr 1fr 1fr 1fr;
+    
+      h1 {
+        font-size: 3rem;
+        margin: 0;
+      }
+    
+      .header-part-one {
+        @include flex-center-center;
+        grid-column: 1 / 4;
+        background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+        background-clip: text;
+        color: transparent
+      }
+    
+      .header-part-two {
+        color: $quaternary;
+        font-size: 6rem;
+        @include flex-center-center;
+        grid-column: 2 / 6;
+      }
+    
+      .header-part-three {
+        @include flex-center-center;
+        grid-column: 4 / 7;
+        background-image: linear-gradient(90deg, $gradient-color-two, $gradient-color-one);
+        background-clip: text;
+        color: transparent
+      }
+    }
+
     .row {
       @include flex-center-center;
       flex-flow: row wrap;
@@ -29,7 +62,7 @@
         text-decoration: none;
       }
   
-      .card {
+      .dashboard-card {
         @include flex-center-center;
         border: solid 2px;
         border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;

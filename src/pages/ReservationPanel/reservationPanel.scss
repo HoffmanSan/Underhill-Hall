@@ -9,7 +9,10 @@
 
   .reservation-panel-container {
     @include container;
-    @include event-card;
+    
+    button {
+      display: none;
+    }
   }
   
   .form-container {
@@ -28,6 +31,7 @@
 
       form {
         @include flex-center-center;
+        @include submit-button;
         flex-direction: column;
 
         label {
@@ -80,41 +84,10 @@
           padding: $base-padding $base-padding*2;
           margin: 0;
         }
-
-        .submit-button {
-          color: $quaternary;
-          font-family: Poppins;
-          font-size: 1.25em;
-          border: solid 2px;
-          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
-          padding: $base-padding $base-padding*2;
-          background: transparent;
-          margin: $base-margin;
-          cursor: pointer;
-          position: relative;
-          isolation: isolate;
-          outline: none;
-  
-          &::after{
-            content: '';
-            position: absolute;
-            z-index: -1;
-            background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
-            inset: 0;
-            scale: 0 1;
-            transform-origin: right;
-            transition: scale 450ms;
-          }
-  
-          &:hover::after,
-          &:focus-visible::after {
-            transform-origin: left;
-            scale: 1 1;
-          }
-        }
       }
     }
   }
+  
   .legend {
     @include flex-center-center;
     flex-direction: column;
@@ -134,7 +107,7 @@
       li {
         @include flex-center-center;
 
-        & * {
+        * {
         padding: $base-padding*0.75;
         }
       }

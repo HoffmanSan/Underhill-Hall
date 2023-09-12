@@ -1,0 +1,53 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+
+.event-card {
+  display: grid;
+  grid-template: auto / 1fr 3fr;
+  color: $tertiary;
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+  &:first-child {
+    border-top: none;
+  }
+
+  img {
+    padding: $base-padding $base-padding 0 $base-padding;
+  }
+  
+  .card-details {
+    @include submit-button;
+    padding: 0 $base-padding;
+    
+    h3 {
+      font-size: 32px;
+      margin: $base-margin 0 0 0;
+    }
+
+    p {
+      margin: $base-margin 0;
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding-left: 0;
+      margin: $base-margin 0;
+    }
+
+    li {
+      padding: 0 $base-padding;
+      border-right: 1px solid $tertiary;
+    }
+
+    li:first-child {
+      padding-left: 0;
+    }
+
+    li:last-child{
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+}
