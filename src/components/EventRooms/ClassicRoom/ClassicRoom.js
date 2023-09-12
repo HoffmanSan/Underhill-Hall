@@ -1,25 +1,10 @@
-// Imports
-import { useState } from "react";
-
 // Styles
 import './classicRoom.scss';
 
 // Components
-import Sector from '../../SectorLayout/Sector';
-
-// Sector seats generating
-const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
-  const sectorSeats = [];
-  for (let i = 1; i <= sectorSeatsQuantity; i++) {
-    sectorSeats.push({'sector': `${sectorRef}`, 'seatNumber': i});
-  };
-  return sectorSeats;
-};
+import Sector from '../../Sector/Sector';
 
 export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
-  const [sectorASeats] = useState(() => generateSectorSeats(`A`, 100));
-  const [sectorBSeats] = useState(() => generateSectorSeats(`B`, 100));
-
   return (
     <div className="classic-room">
 
@@ -36,8 +21,8 @@ export default function ClassicRoom({ handleClick, clickedSeats, takenSeats }) {
       {/* Room layout */}
       <div className="container">
         <div className="stage"><h3>STAGE</h3></div>
-        <Sector sectorRef="A" seatsArrayRef={sectorASeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="B" seatsArrayRef={sectorBSeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="A" seatsQuantity={100} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="B" seatsQuantity={100} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
       </div>
     </div>
   )

@@ -23,7 +23,6 @@
 
   .event-list-container {
     @include container;
-    @include event-card;
 
     .event-list-empty {
       @include flex-center-center;

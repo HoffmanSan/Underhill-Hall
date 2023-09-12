@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 // Styles
 import './App.scss'
 
-// Components
-import { Navbar, Header, Dashboard, EventList, AboutUs, ContactUs, ReservationPanel, Footer }  from './components';
+// Components & Pages
+import { Navbar, Footer }  from './components';
+import { AboutUs, ContactUs, Dashboard, EventList, ReservationPanel } from './pages';
 
 // Never changing values
 const event_types = ["Concerts", "Theatre", "Science", "Ballet", "Stand-up", "Opera", "Cinema", "Kids", "Art Exhibitions"];
@@ -15,7 +16,7 @@ function App() {
     <div className="App">
       <Navbar />
         <Routes>
-          <Route path="" element={<><Header /><Dashboard eventTypes={event_types}/></>}></Route>
+          <Route path="" element={<Dashboard eventTypes={event_types}/>}></Route>
           <Route path="events/:type" element={<EventList />}></Route>
           <Route path="events/:type/:eventId/*" element={<ReservationPanel />}></Route>
           <Route path="about" element={<AboutUs />}></Route>

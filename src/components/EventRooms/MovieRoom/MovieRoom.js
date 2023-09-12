@@ -1,26 +1,11 @@
-// Imports
-import { useState } from "react";
-
 // Styles
 import './movieRoom.scss';
 
 // Components
-import Sector from '../../SectorLayout/Sector';
-
-// Sector seats generating
-const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
-  const sectorSeats = [];
-  for (let i = 1; i <= sectorSeatsQuantity; i++) {
-    sectorSeats.push({'sector': `${sectorRef}`, 'seatNumber': i});
-  };
-  return sectorSeats;
-};
+import Sector from '../../Sector/Sector';
 
 export default function MovieRoom({ handleClick, clickedSeats, takenSeats }) {
-  const [sectorASeats] = useState(() => generateSectorSeats('A', 100));
-  const [sectorBSeats] = useState(() => generateSectorSeats('B', 100));
-
-  return (
+return (
     <div className="movie-room"> 
 
       {/* Room model (visible only on mobile devices for easier reservation making process) */}
@@ -36,8 +21,8 @@ export default function MovieRoom({ handleClick, clickedSeats, takenSeats }) {
       {/* Room layout */}
       <div className="container">
         <div className="screen"><h3>SCREEN</h3></div>
-        <Sector sectorRef="A" seatsArrayRef={sectorASeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="B" seatsArrayRef={sectorBSeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="A" seatsQuantity={100} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="B" seatsQuantity={100} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
       </div>
     </div>
   )

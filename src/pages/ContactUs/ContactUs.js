@@ -5,17 +5,21 @@ import emailjs from '@emailjs/browser';
 // Styles
 import './contactUs.scss';
 
+// Components
+import { Modal } from '../../components/index';
+
 export default function ContactUs() {
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
-	const [message, setMessage] = useState('')
+	const [emailMessage, setEmailMessage] = useState('')
 	const [status, setStatus] = useState('')
+	const [statusMessage, setStatusMessage] = useState('')
 
 	// Form inputs reset
 	const resetForm = () => {
 		setName('');
 		setEmail('');
-		setMessage('');
+		setEmailMessage('');
 	};
 
 	// EmailJS - email sending process
@@ -24,19 +28,26 @@ export default function ContactUs() {
 	const sendEmail = (e) => {
 		e.preventDefault();
 
-		emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, form.current, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
+		emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID_1, form.current, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
 		.then((result) => {
 			console.log(result.text);
 			setStatus('success');
+			setStatusMessage('Email sent successfully');
 		}, (error) => {
 			console.log(error.text);
 			setStatus('error');
+			setStatusMessage('Email sending failed. Please try again');
 		});
 		resetForm();
 		setTimeout(() => {
 			setStatus('');
 		}, 5000);
 	};
+
+	const closeModal = () => {
+    setStatus('');
+  };
+
 
   return (
 	<div className="contact">
@@ -51,7 +62,7 @@ export default function ContactUs() {
 				</div>
 				<div className="contact-correspondence">
 					<h3>Correspondence</h3>
-					<p>Underhill Hall <br /> Jana Pawła II st. <br /> 21-370 Papieżogród</p>
+					<p>Underhill Hall <br /> 123 Entertainment Street <br /> 12-345 Town City</p>
 				</div>
 			</div>
 
@@ -72,14 +83,13 @@ export default function ContactUs() {
 				<label htmlFor='u_message'>
 					<h3>Message</h3>
 				</label>
-				<textarea name="message" id="u_message" onChange={(e) => setMessage(e.target.value)} value={message} required/>
+				<textarea name="message" id="u_message" onChange={(e) => setEmailMessage(e.target.value)} value={emailMessage} required/>
 
-				<button className="form-button" type="submit" value="Send">Send</button>
+				<button className="submit-button" type="submit" value="Send">Send</button>
 			</form>
 
 			{/* Success/Error element render based on submit process outcome */}
-			{status === 'success' && <div className="success-popup">Email sent successfully</div>}
-			{status === 'error' && <div className="error-popup">Email sending failed <br />Please try again</div>}
+			{status !== '' && <Modal statusMessage={statusMessage} closeModal={closeModal} />}
 		</div>
 	</div>
   )

@@ -1,28 +1,10 @@
-// Imports
-import { useState } from 'react';
-
 // Styles
 import './concertHall.scss';
 
 // Components
-import Sector from '../../SectorLayout/Sector';
-
-// Sector seats generating
-const generateSectorSeats = (sectorRef, sectorSeatsQuantity) => {
-  const sectorSeats = [];
-  for (let i = 1; i <= sectorSeatsQuantity; i++) {
-    sectorSeats.push({'sector': `${sectorRef}`, 'seatNumber': i});
-  };
-  return sectorSeats;
-};
+import Sector from '../../Sector/Sector';
 
 export default function ConcertHall({ handleClick, clickedSeats, takenSeats }) {
-  const [sectorASeats] = useState(() => generateSectorSeats('A', 198));
-  const [sectorBSeats] = useState(() => generateSectorSeats('B', 288));
-  const [sectorCSeats] = useState(() => generateSectorSeats('C', 198));
-  const [sectorDSeats] = useState(() => generateSectorSeats('D', 198));
-  const [sectorESeats] = useState(() => generateSectorSeats('E', 198));
-
   return (
     <div className="concert-hall">
 
@@ -42,11 +24,11 @@ export default function ConcertHall({ handleClick, clickedSeats, takenSeats }) {
       {/* Room layout */}
       <div className="container">
         <div className="stage"><h3>STAGE</h3></div>
-        <Sector sectorRef="A" seatsArrayRef={sectorASeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="B" seatsArrayRef={sectorBSeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="C" seatsArrayRef={sectorCSeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="D" seatsArrayRef={sectorDSeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
-        <Sector sectorRef="E" seatsArrayRef={sectorESeats} occupiedSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="A" seatsQuantity={198} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="B" seatsQuantity={288} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="C" seatsQuantity={198} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="D" seatsQuantity={198} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
+        <Sector sectorRef="E" seatsQuantity={198} takenSeats={takenSeats} clickedSeats={clickedSeats} handleClick={handleClick} />
       </div>
     </div>
   )
