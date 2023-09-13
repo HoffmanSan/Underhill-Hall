@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Underhill-Hall/static/css/main.18e7a0ed.css",
-    "main.js": "/Underhill-Hall/static/js/main.c917bc13.js",
+    "main.js": "/Underhill-Hall/static/js/main.2b99435a.js",
     "static/media/Werqu-Incorporado-logo.webp": "/Underhill-Hall/static/media/Werqu-Incorporado-logo.baf361c9725fbc1ba5df.webp",
     "static/media/REDAG-development-logo.webp": "/Underhill-Hall/static/media/REDAG-development-logo.8d85f07dd425a55acab9.webp",
     "static/media/AHS-logo.webp": "/Underhill-Hall/static/media/AHS-logo.4996669fe36c51ef3d45.webp",
     "static/media/Petropo-logo.webp": "/Underhill-Hall/static/media/Petropo-logo.7203388d0c356bd62fa6.webp",
     "index.html": "/Underhill-Hall/index.html",
     "main.18e7a0ed.css.map": "/Underhill-Hall/static/css/main.18e7a0ed.css.map",
-    "main.c917bc13.js.map": "/Underhill-Hall/static/js/main.c917bc13.js.map"
+    "main.2b99435a.js.map": "/Underhill-Hall/static/js/main.2b99435a.js.map"
   },
   "entrypoints": [
     "static/css/main.18e7a0ed.css",
-    "static/js/main.c917bc13.js"
+    "static/js/main.2b99435a.js"
   ]
 }
