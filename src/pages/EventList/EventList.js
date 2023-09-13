@@ -8,7 +8,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import './eventList.scss';
 
 // Components
-import { EventCard, NotFound } from '../../components';
+import { EventCard } from '../../components';
 
 export default function EventList({ eventTypes }) {
   const { type } = useParams();
@@ -33,34 +33,26 @@ export default function EventList({ eventTypes }) {
   }, [type]);
   
   return (
-    <>
-      {/* If 'type' parameter matches a value in eventTypes array - render EventList with collection data, if it doesn't - render NotFound */}
-      {eventTypes.includes(type) ? 
+    <div className="event-list">
+      
+      {/* Heading */}
+      <div className="event-list-heading">
+        <h2>{type}</h2>
+      </div>
+      
+      {isLoading && <p>Loading...</p>}
+      {!isLoading && 
+        <div className="event-list-container">
 
-        <div className="event-list">
-          
-          {/* Heading */}
-          <div className="event-list-heading">
-            <h2>{type}</h2>
-          </div>
-          
-          {isLoading && <p>Loading...</p>}
-          {!isLoading && 
-            <div className="event-list-container">
+        {/* Event card */}
+        {events && events.map(event => (
+          <EventCard key={event.id} event={event} type={type} />
+        ))}
 
-            {/* Event card */}
-            {events && events.map(event => (
-              <EventCard key={event.id} event={event} type={type} />
-            ))}
-
-            {/* If there are no events of this type */}
-            {events.length === 0 &&  <div className="event-list-empty"><p>There are currently no events</p></div>}
-          </div>
-          }
-        </div>
-
-      :
-      <NotFound />}
-    </>
+        {/* If there are no events of this type */}
+        {events.length === 0 &&  <div className="event-list-empty"><p>There are currently no events</p></div>}
+      </div>
+      }
+    </div>
   )
 }

@@ -19,7 +19,7 @@ export default function Dashboard({ eventTypes }) {
       
       <div className="dashboard-container">
           {eventTypes.map(type => (
-              <Link to={`events/${type}`} key={type}>
+              <Link to={`/events/${type}`} key={type}>
                 <div className="dashboard-card">
                   <h2>{type}</h2>
                 </div>

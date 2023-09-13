@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.scss'
 
 // Components & Pages
-import { Navbar, Footer, NotFound }  from './components';
+import { Navbar, Footer }  from './components';
 import { AboutUs, ContactUs, Dashboard, EventList, ReservationPanel } from './pages';
 
 // Never changing values
@@ -16,12 +16,12 @@ function App() {
     <div className="App">
       <Navbar />
         <Routes>
-          <Route exact path="/" element={<Dashboard eventTypes={event_types}/>} />
-          <Route exact path="events/:type" element={<EventList eventTypes={event_types} />} />
-          <Route exact path="events/:type/:eventId" element={<ReservationPanel />} />
-          <Route exact path="about" element={<AboutUs />} />
-          <Route exact path="contact" element={<ContactUs />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/" element={<Dashboard eventTypes={event_types}/>} />
+          <Route path="/underhill-hall" element={<Dashboard eventTypes={event_types}/>} />
+          <Route path="/events/:type" element={<EventList eventTypes={event_types} />} />
+          <Route path="/events/:type/:eventId" element={<ReservationPanel />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Routes>
       <Footer />
     </div>

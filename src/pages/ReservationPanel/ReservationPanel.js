@@ -10,7 +10,7 @@ import emailjs from '@emailjs/browser';
 import './reservationPanel.scss';
 
 // Components
-import { AudienceRoom, ClassicRoom, ConcertHall, MovieRoom, EventCard, Modal, NotFound } from '../../components';
+import { AudienceRoom, ClassicRoom, ConcertHall, MovieRoom, EventCard, Modal } from '../../components';
 
 // Button types for seats legend
 const buttonTypes = ['Open', 'Taken', 'Clicked'];
@@ -143,66 +143,59 @@ export default function ReservationPanel() {
   };
 
   return (
-    <>
-      {/* If 'eventId' parameter matches a document in the database - render EventList with document data, if it doesn't - render NotFound */}
-      {event ? 
-      <div className="reservation-panel">
-        <div className="event-card-container">
-          <EventCard event={event} type={type} eventId={eventId} />
-        </div>
-
-        <div className="form-container">
-          {/* Reservation making form */}
-            <h3>Make a reservation:</h3>
-            <form onSubmit={(e) => handleReservation(e)}>
-
-              <label htmlFor="rervation_name">Enter your name and surname:</label>
-              <input value={name} type="text" id="rervation_name" autoComplete="off" required onChange={(e) => setName(e.target.value)}/>
-
-              <label htmlFor="rervation_email">Enter an e-mail address for the reservation:</label>
-              <input value={email} type="email" id="rervation_email" autoComplete="off" required onChange={(e) => setEmail(e.target.value)}/>
-              <p>(Enter an existing email to receive a booking confirmation)</p>
-              
-              {/* Displaying the seats that the user's trying to book */}
-              <div className="chosen-seats-display">
-                <h3>Your seats:</h3>
-                <div>
-                  {/* If there are no clicked seats - display the paragraph */}
-                  {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btn" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
-                </div>
-              </div>
-
-              <button className="submit-button" type="submit">Submit</button>
-            </form>
-        </div>
-
-        {/* Seats Legend */}
-        <div className="legend">
-        <h3>Legend:</h3>
-          <ul>
-            {buttonTypes.map(buttonType => (
-              <li key={buttonType}>
-                <button disabled className={buttonType}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 26 26">
-                    <path fill="currentColor" d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557z"/>
-                  </svg>
-                </button>
-                <p>{buttonType}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        
-        {/* Render the proper room after successful connection with the database */}
-        {event.takenSeats ? roomChoice() : <p>Loading...</p>}
-
-        {/* Show modal with statusMessage on status change */}
-        {status !== "" && <Modal statusMessage={statusMessage} closeModal={closeModal} />}
+    <div className="reservation-panel">
+      
+      <div className="event-card-container">
+        <EventCard event={event} type={type} eventId={eventId} />
       </div>
 
-      :
-      <NotFound />
-      }
-    </>
+      <div className="form-container">
+        {/* Reservation making form */}
+          <h3>Make a reservation:</h3>
+          <form onSubmit={(e) => handleReservation(e)}>
+
+            <label htmlFor="rervation_name">Enter your name and surname:</label>
+            <input value={name} type="text" id="rervation_name" autoComplete="off" required onChange={(e) => setName(e.target.value)}/>
+
+            <label htmlFor="rervation_email">Enter an e-mail address for the reservation:</label>
+            <input value={email} type="email" id="rervation_email" autoComplete="off" required onChange={(e) => setEmail(e.target.value)}/>
+            <p>(Enter an existing email to receive a booking confirmation)</p>
+            
+            {/* Displaying the seats that the user's trying to book */}
+            <div className="chosen-seats-display">
+              <h3>Your seats:</h3>
+              <div>
+                {/* If there are no clicked seats - display the paragraph */}
+                {clickedSeats.length !== 0 ? clickedSeats.map(seat => (<button className="chosen-seats-btn" disabled key={seat}>{`${seat}`}</button>)) : <p>Pick a seat!</p>}
+              </div>
+            </div>
+
+            <button className="submit-button" type="submit">Submit</button>
+          </form>
+      </div>
+
+      {/* Seats Legend */}
+      <div className="legend">
+      <h3>Legend:</h3>
+        <ul>
+          {buttonTypes.map(buttonType => (
+            <li key={buttonType}>
+              <button disabled className={buttonType}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 26 26">
+                  <path fill="currentColor" d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557z"/>
+                </svg>
+              </button>
+              <p>{buttonType}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      {/* Render the proper room after successful connection with the database */}
+      {event.takenSeats ? roomChoice() : <p>Loading...</p>}
+
+      {/* Show modal with statusMessage on status change */}
+      {status !== "" && <Modal statusMessage={statusMessage} closeModal={closeModal} />}
+    </div>
   )
 }
