@@ -1,5 +1,6 @@
 @use '../../sass/variables' as *;
 @use '../../sass/mixins' as *;
+@use '../../sass/breakpoints' as *;
 
 .about {
   @include gradient-background-horizontal;
@@ -12,5 +13,23 @@
       margin: 0;
       padding-bottom: $base-padding*3;
     }
+  }
+}
+
+@include mobile {
+  .about-container{
+    text-align: center;
+    
+    h2 {
+      font-size: 1.25em;
+    }
+    p {
+      font-size: 0.75em;
+    }
+  }
+}
+@include tablet {
+  .about-container{
+    text-align: center;
   }
 }

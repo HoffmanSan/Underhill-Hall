@@ -8,14 +8,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import './eventList.scss';
 
 // Components
-import { EventCard } from '../../components/index';
+import { EventCard, NotFound } from '../../components';
 
-export default function EventList() {
+export default function EventList({ eventTypes }) {
   const { type } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [events, setEvents] = useState([]);
   
-  // Database document access
+  // Database collection access
   useEffect(() => {
     const collectionRef = collection(db, type);
     setIsLoading(true);
@@ -33,26 +33,34 @@ export default function EventList() {
   }, [type]);
   
   return (
-    <div className="event-list">
-      
-      {/* Heading */}
-      <div className="event-list-heading">
-        <h2>{type}</h2>
-      </div>
-      
-      {isLoading && <p>Loading...</p>}
-      {!isLoading && 
-        <div className="event-list-container">
+    <>
+      {/* If 'type' parameter matches a value in eventTypes array - render EventList with collection data, if it doesn't - render NotFound */}
+      {eventTypes.includes(type) ? 
 
-        {/* Event card */}
-        {events && events.map(event => (
-          <EventCard key={event.id} event={event} type={type} />
-        ))}
+        <div className="event-list">
+          
+          {/* Heading */}
+          <div className="event-list-heading">
+            <h2>{type}</h2>
+          </div>
+          
+          {isLoading && <p>Loading...</p>}
+          {!isLoading && 
+            <div className="event-list-container">
 
-        {/* If there are no events of this type */}
-        {events.length === 0 &&  <div className="event-list-empty"><p>There are currently no events</p></div>}
-      </div>
-      }
-    </div>
+            {/* Event card */}
+            {events && events.map(event => (
+              <EventCard key={event.id} event={event} type={type} />
+            ))}
+
+            {/* If there are no events of this type */}
+            {events.length === 0 &&  <div className="event-list-empty"><p>There are currently no events</p></div>}
+          </div>
+          }
+        </div>
+
+      :
+      <NotFound />}
+    </>
   )
 }

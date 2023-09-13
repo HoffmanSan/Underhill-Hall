@@ -1,5 +1,6 @@
 @use '../../sass/variables' as *;
 @use '../../sass/mixins' as *;
+@use '../../sass/breakpoints' as *;
 
 .event-card {
   display: grid;
@@ -21,7 +22,7 @@
     padding: 0 $base-padding;
     
     h3 {
-      font-size: 32px;
+      font-size: 2em;
       margin: $base-margin 0 0 0;
     }
 
@@ -48,6 +49,68 @@
     li:last-child{
       border-right: none;
       padding-right: 0;
+    }
+  }
+}
+
+// Media breakpoints
+
+@include mobile {
+  .event-card {
+    text-align: center;
+    @include flex-center-center;
+    flex-direction: column;
+
+    img {
+      height: 95%;
+      width: 95%;
+    }
+
+    .card-details {
+      padding: 0;
+      text-align: center;
+      @include flex-center-center;
+      flex-direction: column;
+
+      h3 {
+        font-size: 1.25em;
+      }
+
+      p {
+        font-size: 0.75em;
+        text-align: center;
+      }
+
+      .submit-button {
+        font-size: 0.75em;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .event-card {
+    text-align: center;
+    @include flex-center-center;
+    flex-direction: column;
+
+    .card-details {
+      padding: 0;
+      text-align: center;
+      @include flex-center-center;
+      flex-direction: column;
+
+      h3 {
+        font-size: 1.5em;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .submit-button {
+        font-size: 1em;
+      }
     }
   }
 }

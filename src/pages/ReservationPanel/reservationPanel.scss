@@ -1,5 +1,6 @@
 @use '../../sass/mixins' as *;
 @use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
 @use 'sass:math';
 
 .reservation-panel {
@@ -7,7 +8,7 @@
   @include flex-center-center;
   flex-direction: column;
 
-  .reservation-panel-container {
+  .event-card-container {
     @include container;
     
     button {
@@ -18,72 +19,67 @@
   .form-container {
     @include container;
     @include flex-center-center;
+    flex-direction: column;
     margin: 0 auto;
     margin-top: $base-margin;
     border: 1px solid;
     border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
-    
-    .reservation-form {
-      @include container;
-      text-align: center;
-      padding: $base-padding;
-      padding: auto;
 
-      form {
+    form {
+      @include flex-center-center;
+      @include submit-button;
+      flex-direction: column;
+      max-width: 400px;
+
+      label {
+        color: $tertiary;
+        padding: $base-padding;
+      }
+
+      input {
+        padding: $base-padding;
+        border-radius: 10px;
+        text-align: center;
+        font-family: $base-font-family;
+        font-size: 1em;
+        width: 80%;
+        outline: none;
+        border: solid 2px;
+        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+      }
+
+      .chosen-seats-display {
         @include flex-center-center;
-        @include submit-button;
         flex-direction: column;
+        border: solid 2px;
+        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+        margin: $base-margin;
+        padding: $base-padding;
+        width: 80%;
+        text-align: center;
 
-        label {
-          color: $tertiary;
-          padding: $base-padding;
+        h3 {
+          margin: $base-margin;
         }
 
-        input {
+        .chosen-seats-btn {
+          cursor: default;
+          font-weight: bold;
+          margin: math.div($base-margin, 2);
           padding: $base-padding;
-          border-radius: 10px;
-          text-align: center;
-          font-family: Poppins;
-          font-size: 15px;
-          width: 40%;
-
-          &:hover {
-            background-color: lightgray;
-            cursor: default;
-          }
-        }
-
-        .chosen-seats-display {
-          @include flex-center-center;
-          flex-direction: column;
           border: solid 2px;
           border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
-          margin: $base-margin*2;
-          padding: $base-padding;
-          width: 40%;
-
-          h3 {
-            margin: $base-margin;
-          }
-
-          .chosen-seats-btn {
-            cursor: default;
-            font-weight: bold;
-            margin: math.div($base-margin, 2);
-            padding: $base-padding;
-            border: solid 2px;
-            border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
-            color: $quaternary;
-            background: transparent;
-            width: 50px;
-          }
+          color: $quaternary;
+          background: transparent;
+          width: 50px;
         }
+      }
 
-        p {
-          color: $tertiary;
-          padding: $base-padding $base-padding*2;
-          margin: 0;
-        }
+      p {
+        color: $tertiary;
+        padding: $base-padding $base-padding*2;
+        margin: 0;
+        text-align: center;
       }
     }
   }
@@ -108,7 +104,106 @@
         @include flex-center-center;
 
         * {
-        padding: $base-padding*0.75;
+          padding: $base-padding*0.75;
+          }
+        
+        button {
+          margin: 0.5px;
+          padding: 0;
+          padding-top: math.div($base-padding, 2);;
+          border: 1px solid $secondary;
+          border-radius: 0.5em;
+          background-color: #888888;
+          color: $primary;
+          cursor: default;
+        
+          svg {
+            filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(343deg) brightness(102%) contrast(101%);
+            height: 60%;
+            width: 60%;
+          }
+
+          &.Taken {
+            background-color: $primary;
+            border: 1px solid $tertiary;
+          }
+
+          &.Clicked {
+            border: 1px solid $secondary;
+            background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Media breakpoints
+
+@include mobile {
+  .reservation-panel {
+    .form-container {
+      form {
+        label, p {
+          font-size: 0.75em;
+          text-align: center;
+        }
+
+        input {
+          width: 95%;
+          padding: math.div($base-padding, 2);
+          font-size: 0.75em;
+        }
+
+        .submit-button {
+          font-size: 0.75em;
+        }
+
+        .chosen-seats-display {
+          width: 80%;
+
+          h3 {
+            font-size: 1em;
+          }
+
+          .chosen-seats-btn {
+            width: 40px;
+            font-size: 0.75em;
+            font-weight: normal;
+            text-align: center;
+            padding: math.div($base-padding, 2);
+          }
+        }
+      }
+    }
+    .legend {
+      ul {
+        flex-direction: column;
+
+        li {
+          display: grid;
+          grid-template: auto / 1fr 1.5fr;
+
+          button {
+           margin: $base-margin;
+          }
+
+          p {
+            text-align: center;
+            padding: 0;
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+@include tablet {
+  .reservation-panel {
+    .form-container {
+      form {
+        .submit-button {
+          font-size: 1em;
         }
       }
     }

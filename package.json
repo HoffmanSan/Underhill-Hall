@@ -1,7 +1,7 @@
 {
   "name": "event-reservations-handling-project",
   "version": "0.1.0",
-  "homepage": "https://HoffmanSan.github.io/event-reservations-handling-project",
+  "homepage": "https://HoffmanSan.github.io/Underhill-Hall",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

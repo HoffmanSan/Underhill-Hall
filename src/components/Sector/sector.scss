@@ -1,9 +1,10 @@
-@use '../../sass//variables' as *;
+@use '../../sass/variables' as *;
+@use 'sass:math';
 
 button {
   margin: 0.5px;
   padding: 0;
-  padding-top: 4px;
+  padding-top: math.div($base-padding, 2);
   border: 1px solid $secondary;
   border-radius: 0.5em;
   background-color: #888888;
@@ -28,7 +29,6 @@ button {
 
   &.clicked {
     border: 1px solid $secondary;
-    border-radius: 0.5em;
     background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
   }
 }

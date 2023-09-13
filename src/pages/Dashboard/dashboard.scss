@@ -1,5 +1,7 @@
 @use '../../sass/mixins' as *;
 @use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+@use 'sass:math';
 
 .dashboard {
   width: 100%;
@@ -8,7 +10,7 @@
   .dashboard-title {
     text-align: center;
     color: $quaternary;
-    font-size: 3rem;
+    font-size: 3em;
     padding: $base-padding;
     margin: $base-margin;
     border-top: 2px solid;
@@ -18,14 +20,17 @@
 
   .dashboard-container {
     @include container;
+    @include flex-center-center;
+    flex-flow: row wrap;
     padding: $base-padding*2.5;
+    gap: 20px;
 
     .dashboard-header {
       display: grid;
-      grid-template: repeat(3, 0.75fr) / 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template: repeat(3, 0.75fr) / repeat(6, 1fr);
     
       h1 {
-        font-size: 3rem;
+        font-size: 3em;
         margin: 0;
       }
     
@@ -39,7 +44,7 @@
     
       .header-part-two {
         color: $quaternary;
-        font-size: 6rem;
+        font-size: 6em;
         @include flex-center-center;
         grid-column: 2 / 6;
       }
@@ -53,31 +58,112 @@
       }
     }
 
-    .row {
+    a {
+      text-decoration: none;
+      width: 32%;
+    }
+
+    .dashboard-card {
       @include flex-center-center;
-      flex-flow: row wrap;
-      gap: 20px;
+      border: solid 2px;
+      border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+      color: $quaternary;
+      height: 200px;
+      width: 100%;
+      margin: 0;
 
-      a {
-        text-decoration: none;
+      &:hover {
+        font-size: 1.5em;
       }
-  
-      .dashboard-card {
-        @include flex-center-center;
-        border: solid 2px;
-        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
-        color: $quaternary;
-        height: 200px;
-        width: 100%;
+
+      h2 {
         margin: 0;
-  
-        &:hover {
-          font-size: 25px;
+      }
+    }
+  }
+}
+
+// Media breakpoints
+@include mobile {
+  .dashboard {
+    .dashboard-container {
+      padding: $base-padding*1.5;
+      gap: 10px;
+      
+      .dashboard-header {
+        text-align: center;
+
+        .header-part-one {
+          grid-column: 1 / 7;
+          font-size: 1.5em;
         }
 
-        h2 {
-          margin: 0;
+        .header-part-two {
+          grid-column: 1 / 7;
+          font-size: 2.5em;
         }
+
+        .header-part-three {
+          grid-column: 1 / 7;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .dashboard-title {
+      font-size: 1.5em;
+    }
+
+    a {
+      min-width: 95%;
+
+      h2 {
+        font-size: 1em;
+      }
+    }
+
+    .dashboard-card {
+      max-height: 125px;
+    }
+  }
+}
+
+@include tablet {
+  .dashboard {
+    .dashboard-container {
+      padding: $base-padding*1.5;
+      gap: 10px;
+      
+      .dashboard-header {
+        text-align: center;
+
+        .header-part-one {
+          grid-column: 1 / 7;
+          font-size: 3.25em;
+        }
+
+        .header-part-two {
+          grid-column: 1 / 7;
+          font-size: 4.5em;
+        }
+
+        .header-part-three {
+          grid-column: 1 / 7;
+          font-size: 3.25em;
+        }
+      }
+    }
+
+    .dashboard-title {
+      font-size: 2.5em;
+    }
+
+    a {
+      min-width: 45%;
+      margin: $base-margin;
+
+      h2 {
+        font-size: 1.25em;
       }
     }
   }

@@ -1,5 +1,7 @@
 @use '../../../sass/mixins' as *;
 @use '../../../sass/variables' as *;
+@use '../../../sass/breakpoints' as *;
+@use 'sass:math';
 
 .classic-room {
   @include gradient-background-horizontal;
@@ -10,7 +12,11 @@
     @include flex-center-center;
     flex-direction: column;
     display: none;
-    padding: 0;
+    padding: $base-padding;
+
+    h3 {
+      margin: math.div($base-margin, 2);
+    }
 
     .room-model {
       display: grid;
@@ -45,7 +51,7 @@
   .container {
     @include container;
     display: grid;
-    grid-template: 1fr 3fr / 1fr 1fr;
+    grid-template: 0.75fr 3fr / 1fr 1fr;
     column-gap: 10%;
     padding: $base-padding*2.5 $base-padding;
     border: 1px solid;
@@ -79,6 +85,71 @@
 
     .sector-B {
       grid-area: 2 / 2 / 3 / 3;
+    }
+  }
+}
+
+// Media queries
+
+@include mobile {
+  .classic-room {
+    .room-model-hidden {
+      display: flex;
+    }
+
+    .container {
+      grid-template: 1fr 1fr / 1fr;
+      column-gap: 0;
+      padding: $base-padding math.div($base-padding, 2);
+
+      .stage {
+        display: none;
+      }
+
+      .sector {
+        h3 {
+          margin: math.div($base-padding, 2);
+        }
+      }
+
+      .sector-A {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+  
+      .sector-B {
+        grid-area: 2 / 1 / 2 / 3;
+      }
+    }
+  }
+}
+@include tablet {
+  .classic-room {
+    .room-model-hidden {
+      display: flex;
+    }
+
+    .container {
+      grid-template: 1fr / repeat(2, auto) ;
+      column-gap: 10%;
+      padding: $base-padding math.div($base-padding, 2);
+
+      .stage {
+        display: none;
+      }
+
+      .sector {
+        h3 {
+          margin: math.div($base-padding, 2);
+        }
+      }
+
+      .sector-A {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+  
+      .sector-B {
+        grid-area: 1 / 2 / 2 / 3;
+      }
     }
   }
 }

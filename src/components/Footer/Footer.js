@@ -21,8 +21,14 @@ export default function Footer() {
 
   return (
     <div className="footer">
-      <div className="footer-links">
 
+      <div className="credit">
+        <p>All event images have been generated with <a href="https://www.hotpot.ai/art-generator" target="_blank" rel="noreferrer">Hotpot.ai art-generator</a></p>
+        <p>All names portrayed in this app are a work of fiction. No identification with actual persons is intended or should be inferred.</p>
+      </div>
+
+      <div className="footer-links">
+    
         {/* Social media links */}
         <p className="footer-paragraph">Find us on social media:</p>
         <ul>

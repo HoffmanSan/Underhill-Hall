@@ -1,5 +1,6 @@
 @use '../../sass/variables' as *;
 @use '../../sass/mixins' as *;
+@use '../../sass/breakpoints' as *;
 
 .modal, .overlay {
   width: 100vw;
@@ -39,5 +40,23 @@
 
   p {
     text-align: justify;
+  }
+}
+
+// Media queries
+
+@include mobile {
+  .modal-content {
+    height: 150px;
+    min-width: 250px;
+
+    h3 {
+      font-size: 0.75em;
+      max-width: 100%;
+    }
+
+    .submit-button {
+      font-size: 0.75em;
+    }
   }
 }
