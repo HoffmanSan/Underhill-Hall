@@ -4,7 +4,7 @@ import { useState } from "react";
 // Styles
 import './sector.scss';
 
-// Sector seats generating
+// Sector seats array generating
 const generateSectorSeats = (sectorRef, seatsQuantity) => {
   const seats = [];
   for (let i = 1; i <= seatsQuantity; i++) {
@@ -33,7 +33,6 @@ export default function Sector({sectorRef, seatsQuantity, takenSeats, clickedSea
           disabled={takenSeats.includes(`${seat.sectorRef}${seat.seatNumber}`)}
           // Give the seat a label for screen readers
           aria-label={`seat ${seat.sectorRef}${seat.seatNumber}`}
-          // Call the handleClick function and pass the clicked seat reference
           onClick={() => {handleClick(`${seat.sectorRef}${seat.seatNumber}`)}}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 26 26">

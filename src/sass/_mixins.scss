@@ -22,7 +22,7 @@
 @mixin submit-button {
   .submit-button {
     color: $quaternary;
-    font-family: Poppins;
+    font-family: $base-font-family;
     font-size: 1.25em;
     border: solid 2px;
     border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;

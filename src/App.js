@@ -5,22 +5,23 @@ import { Routes, Route } from 'react-router-dom';
 import './App.scss'
 
 // Components & Pages
-import { Navbar, Footer }  from './components';
+import { Navbar, Footer, NotFound }  from './components';
 import { AboutUs, ContactUs, Dashboard, EventList, ReservationPanel } from './pages';
 
 // Never changing values
-const event_types = ["Concerts", "Theatre", "Science", "Ballet", "Stand-up", "Opera", "Cinema", "Kids", "Art Exhibitions"];
+const event_types = ["Opera", "Theatre", "Science", "Ballet", "Concerts", "Stand-up", "Cinema", "Kids", "Others"];
 
 function App() {
   return (
     <div className="App">
       <Navbar />
         <Routes>
-          <Route path="" element={<Dashboard eventTypes={event_types}/>}></Route>
-          <Route path="events/:type" element={<EventList />}></Route>
-          <Route path="events/:type/:eventId/*" element={<ReservationPanel />}></Route>
-          <Route path="about" element={<AboutUs />}></Route>
-          <Route path="contact" element={<ContactUs />}></Route>
+          <Route exact path="/" element={<Dashboard eventTypes={event_types}/>} />
+          <Route exact path="events/:type" element={<EventList eventTypes={event_types} />} />
+          <Route exact path="events/:type/:eventId" element={<ReservationPanel />} />
+          <Route exact path="about" element={<AboutUs />} />
+          <Route exact path="contact" element={<ContactUs />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       <Footer />
     </div>

@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser';
 import './contactUs.scss';
 
 // Components
-import { Modal } from '../../components/index';
+import { Modal } from '../../components';
 
 export default function ContactUs() {
 	const [name, setName] = useState('')
@@ -67,7 +67,7 @@ export default function ContactUs() {
 			</div>
 
 			{/* Email form template */}
-			<h1>Send us an email</h1>
+			<h2>Send us an email</h2>
 			<form ref={form} onSubmit={sendEmail} autoComplete="off">
 
 				<label htmlFor='u_name'>
