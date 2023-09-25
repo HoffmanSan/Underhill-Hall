@@ -22,3 +22,6 @@ app.post('/api/secret', async (req, res) => {
 app.listen(process.env.PORT, () =>
   console.log("Node server listening on port: " + process.env.PORT)
 );
+
+// Export the Express API
+module.exports = app;
