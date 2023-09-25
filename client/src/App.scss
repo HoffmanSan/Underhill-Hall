@@ -1,0 +1,23 @@
+@use './sass/mixins' as *;
+@use './sass/variables' as *;
+@use './sass/breakpoints' as *;
+
+.App {
+  @include flex-center-center-column;
+  @include gradient-background-horizontal;
+  min-width: 100%;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+// Base utilities
+
+h1, h2, h3 {
+  color: $quaternary;
+}
+
+p, article {
+  color: $tertiary;
+  text-align: justify;
+}

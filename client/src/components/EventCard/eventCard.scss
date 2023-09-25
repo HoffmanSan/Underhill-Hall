@@ -1,0 +1,112 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+@use '../../sass/breakpoints' as *;
+
+.event-card {
+  display: grid;
+  grid-template: auto / 1fr 3fr;
+  border-top: 1px solid;
+  border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.card-poster{
+  img {
+    padding-top: $base-padding;
+  }
+}
+
+.card-details {
+  
+  padding: 0 $base-padding*2;
+
+  > * {
+    margin: $base-margin 0;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      padding: 0 $base-padding;
+      border-right: 1px solid $tertiary;
+
+      p {
+        margin: $base-margin 0;
+      }
+    }
+
+    li:first-child {
+      padding-left: 0;
+    }
+
+    li:last-child{
+      border-right: none;
+      padding-right: 0;
+    }
+  }
+
+  button {
+    @include gradient-button;
+  }
+}
+
+// Media breakpoints
+
+@include mobile {
+  .event-card {
+    text-align: center;
+    @include flex-center-center-column;
+
+    img {
+      width: 90%;
+    }
+  }
+
+  .card-details {
+    padding: 0;
+    text-align: center;
+    @include flex-center-center-column;
+
+    h2 {
+      font-size: 1.25em;
+    }
+
+    p {
+      font-size: 0.75em;
+      text-align: center;
+    }
+
+    .submit-button {
+      font-size: 0.75em;
+    }
+  }
+}
+
+@include tablet {
+  .event-card {
+    @include flex-center-center-column;
+
+    .card-details {
+      padding: 0;
+      @include flex-center-center-column;
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .submit-button {
+        font-size: 1em;
+      }
+    }
+  }
+}

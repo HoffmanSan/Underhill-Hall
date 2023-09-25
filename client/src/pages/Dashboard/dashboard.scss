@@ -1,0 +1,163 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+@use 'sass:math';
+
+.dashboard {
+  width: 100%;
+  @include gradient-background-horizontal;
+
+  .dashboard-title {
+    text-align: center;
+    color: $quaternary;
+    font-size: 3em;
+    padding: $base-padding;
+    margin: $base-margin;
+    border-width: 2px 0;
+    border-style: solid;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+  }
+
+  .dashboard-container {
+    @include container;
+    @include flex-center-center-row;
+    flex-flow: row wrap;
+    padding: $base-padding*2.5;
+    gap: 20px;
+
+    .dashboard-header {
+      min-width: 100%;
+    
+      h2 {
+        font-size: 3em;
+        margin: 0;
+        background-clip: text;
+        color: transparent;
+      }
+
+      h1 {
+        margin: 0;
+      }
+    
+      .header-part-one {
+        text-align: left;
+        background-image: linear-gradient(90deg, $gradient-color-one, 20%, $gradient-color-two);
+      }
+    
+      .header-part-two {
+        text-align: center;
+        font-size: 6em;
+      }
+    
+      .header-part-three {
+        text-align: right;
+        background-image: linear-gradient(90deg, $gradient-color-one, 80%, $gradient-color-two);
+      }
+    }
+
+    a {
+      text-decoration: none;
+      width: 32%;
+    }
+
+    .dashboard-card {
+      @include flex-center-center-row;
+      border: solid 2px;
+      border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+      color: $quaternary;
+      height: 200px;
+      width: 100%;
+      margin: 0;
+
+      &:hover {
+        font-size: 1.5em;
+      }
+
+      h2 {
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Media breakpoints
+@include mobile {
+  .dashboard {
+    .dashboard-container {
+      padding: $base-padding*1.5;
+      gap: 10px;
+      
+      .dashboard-header {
+        text-align: center;
+
+        .header-part-one {
+          text-align: center;
+          font-size: 1.5em;
+        }
+
+        .header-part-two {
+          font-size: 2.5em;
+        }
+
+        .header-part-three {
+          text-align: center;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .dashboard-title {
+      font-size: 1.5em;
+    }
+
+    a {
+      min-width: 95%;
+
+      h2 {
+        font-size: 1em;
+      }
+    }
+
+    .dashboard-card {
+      max-height: 125px;
+    }
+  }
+}
+
+@include tablet {
+  .dashboard {
+    .dashboard-container {
+      padding: $base-padding*1.5;
+      gap: 10px;
+      
+      .dashboard-header {
+        .header-part-one {
+          text-align: center;
+          font-size: 2.5em;
+        }
+
+        .header-part-two {
+          font-size: 4em;
+        }
+
+        .header-part-three {
+          text-align: center;
+          font-size: 2.5em;
+        }
+      }
+    }
+
+    .dashboard-title {
+      font-size: 2.5em;
+    }
+
+    a {
+      min-width: 45%;
+      margin: $base-margin;
+
+      h2 {
+        font-size: 1.25em;
+      }
+    }
+  }
+}

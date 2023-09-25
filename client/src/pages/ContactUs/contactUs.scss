@@ -1,0 +1,120 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+
+.contact {
+  @include gradient-background-horizontal;
+  width: 100%;
+
+  .contact-container {
+    @include container;
+    text-align: center;
+
+    .contact-options {
+      display: grid;
+      grid-template: auto / 1fr 1fr;
+      gap: 16px;
+
+      .contact-hotline, .contact-correspondence {
+        border: 1px dashed $quaternary;
+      }
+
+      p {
+        text-align: center;
+        margin: 0;
+        padding: $base-padding*2;
+        padding-top: 0;
+      }
+      
+      a {
+        color: $quaternary;
+
+        &:hover {
+          background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+          background-clip: text;
+          color: transparent
+        }
+      }
+    }
+
+    form {
+      @include flex-center-center-column;
+      margin: 0 auto;
+
+      h3 {
+        margin: $base-margin;
+      }
+
+      label {
+        min-width: 100%;
+      }
+
+      input, textarea {
+        padding: $base-padding;
+        width: 30%;
+        font-family: $base-font-family;
+        font-size: 1em;
+        text-align: center;
+        border: solid 2px;
+        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+
+        &:focus {
+          outline: none;
+          border: solid 2px;
+          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+        }
+      }
+
+      textarea {
+        height: 150px;
+      }
+
+      button {
+        @include gradient-button;
+      }
+    }
+  }
+}
+
+// Media breakpoints
+@include mobile {
+  .contact {
+    .contact-container {
+      .contact-options {
+        grid-template: 1fr 1fr / auto;
+      }
+
+      form {
+        h3 {
+          font-size: 1em;
+        }
+        input, textarea {
+          min-width: 80%;
+          font-size: 0.75em
+        }
+
+        .submit-button {
+          font-size: 0.75em;
+        }
+      }
+    }
+  }
+}
+@include tablet {
+  .contact {
+    .contact-container {
+      form {
+        h3 {
+          font-size: 1.25em;
+        }
+        input, textarea {
+          min-width: 60%;
+        }
+
+        .submit-button {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

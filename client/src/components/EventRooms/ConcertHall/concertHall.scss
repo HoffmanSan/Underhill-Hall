@@ -1,0 +1,230 @@
+@use '../../../sass/mixins' as *;
+@use '../../../sass/variables' as *;
+@use '../../../sass/breakpoints' as *;
+
+.concert-hall {
+  width: 100%;
+
+  // Room Model CSS
+  .room-model-hidden {
+    @include flex-center-center-column;
+    padding: $base-padding;
+    display: none;
+
+    h2 {
+      font-size: 1.25em;
+      margin: $base-margin;
+    }
+
+    .room-model {
+      display: grid;
+      grid-template: repeat(4, 40px) / repeat(6, 40px);
+      row-gap: 8px;
+      column-gap: 10px;
+
+      div {
+        @include flex-center-center-row;
+        background-color: $quinary;
+      }
+
+      .stage-model {
+        grid-area: 1 / 2 / 2 / 6;
+      }
+
+      .sector-model-A {
+        grid-area: 1 / 1 / 4 / 2;
+      }
+
+      .sector-model-B {
+        grid-area: 2 / 2 / 4 / 6;
+      }
+
+      .sector-model-C {
+        grid-area: 1 / 6 / 4 / 7;
+      }
+
+      .sector-model-D {
+        grid-area: 4 / 1 / 5 / 4;
+      }
+
+      .sector-model-E {
+        grid-area: 4 / 4 / 5 / 7;
+      }
+    }
+  }
+
+  // Room Layout CSS
+  .container {
+    @include container;
+    display: grid;
+    grid-template: repeat(6, 1fr) / repeat(4, 1fr);
+    column-gap: 7px;
+    padding: $base-padding*2;
+    border: 2px solid;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+    .stage {
+      @include flex-center-center-row;
+      background-color: $quaternary;
+      grid-area: 1 / 2 / 2 / 4;
+      
+      h1 {
+        color: $primary;
+      }
+    }
+
+    .sector {
+      display: grid;
+    }
+
+    .sector-name {
+      @include flex-center-center-row;
+    }
+
+    .sector-A, .sector-C {
+      grid-template: repeat(23, auto) / repeat(9, auto);
+      grid-auto-flow: column;
+
+      .sector-name {
+        grid-column: 1 / 10;
+      }
+    }
+
+    .sector-B {
+      grid-template: repeat(16, auto) / repeat(18, 1fr);
+      .sector-name {
+        grid-column: 1 / 19;
+      }
+    }
+
+    .sector-D, .sector-E {
+      grid-template: repeat(12, 1fr) / repeat(18, auto);
+
+      .sector-name {
+        grid-column: 1 / 19;
+      }
+    }
+
+    .sector-A {
+      grid-area: 1 / 1 / 5 / 2;
+    }
+
+    .sector-B {
+      grid-area: 2 / 2 / 5 / 4;
+    }
+
+    .sector-C {
+      grid-area: 1 / 4 / 5 / 5;
+    }
+
+    .sector-D {
+      grid-area: 5 / 1 / 7 / 3;
+    }
+
+    .sector-E {
+      grid-area: 5 / 3 / 7 / 5;
+    }
+  }
+}
+
+// Media queries
+
+@include mobile {
+  .concert-hall {
+    .room-model-hidden {
+      display: flex;
+    }
+    .container {
+      grid-template: repeat(5, auto) / auto;
+      column-gap: 0;
+      padding: $base-padding;
+
+      .stage {
+        display: none;
+      }
+
+      .sector-A {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+  
+      .sector-B {
+        grid-area: 2 / 1 / 3 / 2;
+
+        button {
+          padding: 1px;
+          border-radius: 0.3em;
+        }
+      }
+  
+      .sector-C {
+        grid-area: 3 / 1 / 4 / 2;
+      }
+  
+      .sector-D {
+        grid-area: 4 / 1 / 5 / 2;
+      }
+  
+      .sector-E {
+        grid-area: 5 / 1 / 6 / 2;
+      }
+
+      .sector-D, .sector-E {
+        grid-template: repeat(12, auto) / repeat(18, auto);
+
+        button {
+          padding: 1px;
+          border-radius: 0.3em;
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+  .concert-hall {
+    .room-model-hidden {
+      display: flex;
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      .room-model{
+        font-size: 1.25em;
+      }
+    }
+    .container {
+      grid-template: repeat(4, auto) / auto auto;
+      column-gap: 4px;
+      padding: $base-padding*1.5;
+
+      .stage {
+        display: none;
+      }
+
+      .sector-A {
+        grid-area: 1 / 1 / 2 / 2;
+      }
+  
+      .sector-B {
+        grid-area: 2 / 1 / 3 / 3;
+      }
+  
+      .sector-C {
+        grid-area: 1 / 2 / 2 / 3;
+      }
+  
+      .sector-D {
+        grid-area: 3 / 1 / 4 / 3;
+      }
+  
+      .sector-E {
+        grid-area: 4 / 1 / 5 / 3;
+      }
+
+      .sector-D, .sector-E {
+        grid-template: repeat(12, auto) / repeat(18, auto);
+      }
+    }
+  }
+}

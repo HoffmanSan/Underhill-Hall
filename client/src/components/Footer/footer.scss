@@ -1,0 +1,111 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+@use 'sass:math';
+
+.footer {
+  @include flex-center-center-column;
+  width: 100%;
+  background-image: linear-gradient($secondary, $primary);
+  border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+  border-top: 1px solid;
+
+  small {
+    color: $tertiary;
+  }
+
+  .credit {
+    padding: $base-padding;
+    text-align: center;
+
+    a {
+      color: $quaternary;
+      text-decoration: none;
+
+      &:hover {
+        background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+        background-clip: text;
+        color: transparent
+      }
+    }
+  }
+
+  .footer-links {
+    width: 100%;
+    border-top: 1px solid;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+    text-align: center;
+
+    ul {
+      padding: 0;
+      margin: $base-margin auto;
+      list-style: none;
+      width: 5%;
+    }
+
+    a {
+      @include flex-center-center-row;
+      padding: math.div($base-padding, 2);
+      color: $quaternary;
+      text-decoration: none;
+
+      img {
+        filter: invert(77%) sepia(19%) saturate(127%) hue-rotate(344deg) brightness(83%) contrast(82%);
+        padding-right: 5px;
+      }
+
+      &:hover {
+        filter: invert(78%) sepia(20%) saturate(110%) hue-rotate(343deg) brightness(80%) contrast(89%);
+      }
+    }
+  }
+
+  .footer-sponsors {
+    @include flex-center-center-row;
+    flex-flow: row wrap;
+    width: 100%;
+    border: 1px solid;
+    border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+    img {
+      padding: $base-padding;
+      border-radius: 40px;
+      filter: brightness(70%);
+    }
+  }
+}
+
+// Media breakpoints
+
+@include mobile {
+  .footer {
+    small {
+      font-size: 0.75em;
+    }
+
+    .footer-links {
+      img {
+        height: 15px;
+        width: 15px;
+      }
+    }
+
+    .footer-sponsors {
+      img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+  }
+}
+
+@include tablet {
+  .footer {
+    .footer-sponsors {
+      img {
+        width: 100px;
+          height: 100px;
+      }
+    }
+  }
+}
