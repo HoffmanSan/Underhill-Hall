@@ -1,0 +1,198 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+@use 'sass:math';
+
+.reservation-panel {
+  @include flex-center-center-column;
+  @include gradient-background-horizontal;
+  width: 100%;
+
+  .event-card-container {
+    @include container;
+    
+    button {
+      display: none;
+    }
+  }
+  
+  .form-container {
+    @include container;
+    @include flex-center-center-column;
+    
+
+    form {
+      @include flex-center-center-column;
+      max-width: 400px;
+      border: 1px solid;
+      border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+      label {
+        color: $tertiary;
+        padding: $base-padding;
+        text-align: center;
+
+        input {
+          padding: $base-padding;
+          border-radius: 10px;
+          text-align: center;
+          font-family: $base-font-family;
+          font-size: 1em;
+          width: 80%;
+          outline: none;
+          border: solid 2px;
+          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+        }
+      }
+
+      .picked-seats-display, .reservation-cost {
+        @include flex-center-center-column;
+        border: solid 2px;
+        border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+        margin: $base-margin;
+        padding: $base-padding;
+        text-align: center;
+
+        h3 {
+          margin: $base-margin;
+        }
+
+        .picked-seats-btn {
+          cursor: default;
+          font-weight: bold;
+          margin: math.div($base-margin, 2);
+          padding: $base-padding;
+          border: solid 2px;
+          border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two)1;
+          color: $quaternary;
+          background: transparent;
+          width: 50px;
+        }
+      }
+
+      .reservation-cost {
+        h4 {
+          margin: $base-margin;
+          color: $quaternary;
+        }
+      }
+
+      small {
+        color: $tertiary;
+        padding: $base-padding $base-padding*2;
+        margin: 0;
+        text-align: center;
+      }
+
+      .submit-button {
+        @include gradient-button;
+      }
+    }
+  }
+  
+  .legend {
+    @include flex-center-center-column;
+
+    h2 {
+      margin: $base-margin;
+    }
+
+    ul {
+      @include flex-center-center-row;
+      padding: $base-padding;
+      border: 1px solid;
+      border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+      margin-top: 0;
+      margin-bottom: $base-margin*2;
+
+      li {
+        @include flex-center-center-row;
+
+        * {
+          padding: $base-padding*0.75;
+          }
+        
+        button {
+          @include sector-button;
+          cursor: default;
+        }
+      }
+    }
+  }
+}
+
+// Media breakpoints
+
+@include mobile {
+  .reservation-panel {
+    .form-container {
+      form {
+        label, p {
+          font-size: 0.75em;
+          text-align: center;
+        }
+
+        input {
+          width: 95%;
+          padding: math.div($base-padding, 2);
+          font-size: 0.75em;
+        }
+
+        .submit-button {
+          font-size: 0.75em;
+        }
+
+        .chosen-seats-display {
+          width: 80%;
+
+          h2 {
+            font-size: 1.25em;
+          }
+
+          .chosen-seats-btn {
+            width: 40px;
+            font-size: 0.75em;
+            font-weight: normal;
+            text-align: center;
+            padding: math.div($base-padding, 2);
+          }
+        }
+      }
+    }
+    .legend {
+      h2 {
+        font-size: 1.25em;
+      }
+      ul {
+        flex-direction: column;
+
+        li {
+          display: grid;
+          grid-template: auto / 1fr 1fr;
+
+          button {
+           margin: $base-margin;
+           width: 70%;
+          }
+
+          p {
+            text-align: center;
+            padding: 0;
+            font-size: 0.75em;
+          }
+        }
+      }
+    }
+  }
+}
+@include tablet {
+  .reservation-panel {
+    .form-container {
+      form {
+        .submit-button {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

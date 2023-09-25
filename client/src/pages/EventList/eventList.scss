@@ -1,0 +1,40 @@
+@use '../../sass/mixins' as *;
+@use '../../sass/variables' as *;
+@use '../../sass/breakpoints' as *;
+
+.event-list-heading {
+  text-align: center;
+  width: 100%;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+
+  h1 {
+    margin: $base-margin*1.5;
+  }
+}
+
+.event-list-container {
+  @include container;
+  min-height: 30vh;
+}
+
+.event-list-empty {
+  text-align: center;
+  min-height: 30vh;
+}
+
+// Media breakpoints
+@include mobile {
+  .event-list-heading {
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+}
+@include tablet {
+  .event-list-heading {
+    h1 {
+      font-size: 1.75em;
+    }
+  }
+}

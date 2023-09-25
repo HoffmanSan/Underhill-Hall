@@ -1,0 +1,24 @@
+@use "../../sass/mixins" as *;
+@use "../../sass/variables" as *;
+
+.completion {
+  @include flex-center-center-column;
+  text-align: center;
+  margin: $base-margin;
+
+  p {
+    margin: $base-margin;
+    text-align: center;
+
+    a {  
+      color: $quaternary;
+      text-decoration: none;
+
+      &:hover {
+        background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+        background-clip: text;
+        color: transparent
+      }
+    }
+  }
+}

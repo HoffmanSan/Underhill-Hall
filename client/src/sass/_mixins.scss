@@ -1,0 +1,88 @@
+@use './variables' as *;
+@use 'sass:math';
+
+@mixin container {
+    width: 100%;
+    max-width: 1200px;
+    min-width: none;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  };
+  
+@mixin flex-center-center-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-center-center-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+  
+@mixin gradient-background-horizontal {
+  background-image: linear-gradient($primary, $secondary);
+}
+
+@mixin gradient-button {
+  color: $quaternary;
+  font-family: $base-font-family;
+  font-size: 1em;
+  padding: $base-padding $base-padding*2;
+  margin: $base-margin;
+  border: solid 2px;
+  border-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two) 1;
+  background: transparent;
+  position: relative;
+  isolation: isolate;
+  outline: none;
+  cursor: pointer;
+
+  &::after{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+    inset: 0;
+    scale: 0 1;
+    transform-origin: right;
+    transition: scale 450ms;
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform-origin: left;
+    scale: 1 1;
+  }
+}
+
+@mixin sector-button {
+  margin: 0.5px;
+  padding: 0;
+  padding-top: math.div($base-padding, 2);;
+  border: 1px solid $secondary;
+  border-radius: 0.5em;
+  background-color: $quinary;
+  color: $primary;
+  cursor: pointer;
+
+  svg {
+    filter: invert(100%) sepia(100%) saturate(1%) hue-rotate(343deg) brightness(102%) contrast(101%);
+    height: 60%;
+    width: 60%;
+  }
+
+  &.Taken {
+    background-color: $primary;
+    border: 1px solid $tertiary;
+    cursor: default;
+  }
+
+  &.Picked {
+    border: 1px solid $secondary;
+    background-image: linear-gradient(90deg, $gradient-color-one, $gradient-color-two);
+  }
+}

@@ -1,0 +1,32 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+@use '../../sass/breakpoints' as *;
+
+.sector-name {
+  h2 {
+    margin: $base-margin;
+    text-align: center;
+  }
+}
+
+button {
+  @include sector-button;
+}
+
+// Media querries
+
+@include mobile {
+  .sector-name {
+    h2 {
+      font-size: 1.25em;
+    }
+  }
+}
+
+@include tablet {
+  .sector-name {
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+}
