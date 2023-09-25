@@ -8,7 +8,7 @@ import axios from 'axios';
 // Components
 import { CheckoutForm } from "../../components/index";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY, {
+const stripePromise = loadStripe("/api/secret", {
   locale: 'en'
 });
 
