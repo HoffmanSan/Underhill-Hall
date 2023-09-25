@@ -19,7 +19,7 @@ export default function Payment() {
   useEffect(() => {
     if (data.state !== null) {
       const getSecret = async () => {
-        await axios.post("http://localhost:4000/api/secret", {
+        await axios.post(`http://${process.env.VERCEL_URL}:4000/api/secret`, {
           currency: 'pln',
           amount: data.state.reservationCost * 100,
         }).then((response) => {
