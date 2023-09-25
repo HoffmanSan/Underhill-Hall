@@ -8,7 +8,7 @@ import axios from 'axios';
 // Components
 import { CheckoutForm } from "../../components/index";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY, {
+const stripePromise = loadStripe("pk_test_51NsrTOBQZYHlji8CCE6NaGJpO3JTm32aKObObtSktrvIXHco1il6Jb4frhFTbRVgydtx4iWOQH2DVmrhUfp21ySo00vstSfKZC", {
   locale: 'en'
 });
 
@@ -19,7 +19,7 @@ export default function Payment() {
   useEffect(() => {
     if (data.state !== null) {
       const getSecret = async () => {
-        await axios.post(`https://${process.env.VERCEL_URL}:4000/api/secret`, {
+        await axios.post("/api/secret", {
           currency: 'pln',
           amount: data.state.reservationCost * 100,
         }).then((response) => {
