@@ -8,7 +8,7 @@ import axios from 'axios';
 // Components
 import { CheckoutForm } from "../../components/index";
 
-const stripePromise = loadStripe("/api/secret", {
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY, {
   locale: 'en'
 });
 
@@ -19,7 +19,7 @@ export default function Payment() {
   useEffect(() => {
     if (data.state !== null) {
       const getSecret = async () => {
-        await axios.post(`http://${process.env.VERCEL_URL}:4000/api/secret`, {
+        await axios.post(`https://${process.env.VERCEL_URL}:4000/api/secret`, {
           currency: 'pln',
           amount: data.state.reservationCost * 100,
         }).then((response) => {
