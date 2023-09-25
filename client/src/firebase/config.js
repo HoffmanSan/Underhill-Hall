@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_API_KEY,
-    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
-    projectId: process.env.REACT_APP_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_APPID
+    apiKey: "AIzaSyDUFpH2UcxFlhtNotzWpSklNp4DceBiKVU",
+    authDomain: "event-reservations-b17c6.firebaseapp.com",
+    projectId: "event-reservations-b17c6",
+    storageBucket: "event-reservations-b17c6.appspot.com",
+    messagingSenderId: "914367010624",
+    appId: "1:914367010624:web:9bf1df5c118086901e4ca5"
   };
 
   // init firebase
