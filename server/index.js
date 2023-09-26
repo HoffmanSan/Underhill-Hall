@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
   res.json("The server is working");
 });
 
-app.post('/api/secret', async (req, res) => {
-
+app.post('/secret', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
     currency: req.body.currency,
