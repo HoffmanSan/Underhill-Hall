@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(function (req, res, next) {
+app.options(function (req, res, next) {
 
   if (req.method === "OPTIONS") {
     return res.status(200).send('ok');
