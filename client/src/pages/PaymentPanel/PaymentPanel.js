@@ -19,7 +19,7 @@ export default function Payment() {
   useEffect(() => {
     if (data.state !== null) {
       const getSecret = async () => {
-        await axios.post(`https://${process.env.VERCEL_URL}/api/secret`, {
+        await axios.post(`https://underhill-hall-api.vercel.app/api/secret`, {
           currency: 'pln',
           amount: data.state.reservationCost * 100,
         }).then((response) => {
