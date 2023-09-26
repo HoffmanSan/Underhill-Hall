@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require('cors');
 const dotenv = require("dotenv").config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
@@ -8,7 +7,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Methods", "*");
   res.setHeader("Access-Control-Allow-Headers", "*");
 
   if (req.method === "OPTIONS") {
