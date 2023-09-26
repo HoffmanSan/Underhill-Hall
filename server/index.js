@@ -4,7 +4,13 @@ const dotenv = require("dotenv").config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["https://underhill-hall.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+  }
+));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
