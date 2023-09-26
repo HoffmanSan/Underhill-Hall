@@ -1,18 +1,21 @@
 const express = require("express");
-const cors = require('cors');
 const dotenv = require("dotenv").config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
-app.use(cors(
-  {
-    origin: ["https://underhill-hall.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true
-  }
-));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  next();
+});
 
 app.get('/', (req, res) => {
   res.json("The server is working");
