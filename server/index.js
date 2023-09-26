@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(function (req, res, next) {
+app.options(function (req, res, next) {
 
   if (req.method === "OPTIONS") {
     return res.status(200).send('ok');
@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
   res.json("The server is working");
 });
 
-app.post('/api/secret', async (req, res) => {
-
+app.post('/secret', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
     currency: req.body.currency,
