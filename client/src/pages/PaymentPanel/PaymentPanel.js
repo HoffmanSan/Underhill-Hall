@@ -13,7 +13,6 @@ const stripePromise = loadStripe("pk_test_51NsrTOBQZYHlji8CCE6NaGJpO3JTm32aKObOb
 });
 
 export default function Payment() {
-  axios.defaults.withCredentials = true;
   let data = useLocation();
   const [clientSecret, setClientSecret] = useState('');
 
