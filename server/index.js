@@ -7,17 +7,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.json("The server is working");
 });
 
-app.options('/login', function (req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.end();
-});
 app.post('/api/secret', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
