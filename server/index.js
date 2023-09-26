@@ -6,12 +6,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "*");
-  res.setHeader("Access-Control-Allow-Headers", "*");
 
   if (req.method === "OPTIONS") {
-    return res.status(200).end();
+    return res.status(200).send('ok');
   }
   
   next();
@@ -22,6 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/secret', async (req, res) => {
+
   const paymentIntent = await stripe.paymentIntents.create({
     amount: req.body.amount,
     currency: req.body.currency,
