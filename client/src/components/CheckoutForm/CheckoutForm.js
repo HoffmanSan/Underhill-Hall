@@ -93,7 +93,7 @@ export default function CheckoutForm({ userName, userEmail, userSeats, eventRef,
         });
       })
       .catch((error) => {
-        console.log("Reservation process failed. An error occured: ", error.message);
+        console.error("Reservation process failed. An error occured: ", error.message)
         setIsLoading(false);
       });
 
