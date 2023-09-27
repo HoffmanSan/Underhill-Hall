@@ -90,11 +90,9 @@ export default function CheckoutForm({ userName, userEmail, userSeats, eventRef,
         emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID_2, bookingInformation, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
         .then((response) => {
           console.log('SUCCESS!', response.status, response.text);
-        }, (error) => {
-          console.log('FAILED...', error);
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Reservation process failed. An error occured: ", error.message);
         setIsLoading(false);
       });
@@ -104,6 +102,10 @@ export default function CheckoutForm({ userName, userEmail, userSeats, eventRef,
     }
 
     if (result.error) {
+      if (result.error.message === "This field is incomplete.") {
+        setIsLoading(false)
+        return
+      }
       console.log(result.error.message);
       setReservationOutcome({status: "error", message: result.error.message})
       setIsLoading(false);
