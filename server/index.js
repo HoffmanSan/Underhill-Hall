@@ -14,6 +14,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "GET, POST, PATCH, DELETE, OPTIONS"
   );
+  res.setHeader("Authorization", "Bearer "+ process.env.STRIPE_SECRET_KEY); 
   next();
 });
 app.use(express.json());
