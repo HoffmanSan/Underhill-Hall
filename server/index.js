@@ -1,18 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const dotenv = require("dotenv").config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.options(function (req, res, next) {
-
-  if (req.method === "OPTIONS") {
-    return res.status(200).send('ok');
-  }
-  
-  next();
-});
 
 app.get('/', (req, res) => {
   res.json("The server is working");
