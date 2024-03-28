@@ -63,7 +63,7 @@ export default function Payment() {
 
   return (
     <>
-      {clientSecret && (
+      {clientSecret ? (
         <Elements 
           stripe={stripePromise}
           options={{clientSecret, appearance}}>
@@ -75,7 +75,12 @@ export default function Payment() {
             reservationCost={data.state.reservationCost}
           />
         </Elements>
-      )}
+      )
+      :
+      <h2>
+        Loading...
+      </h2>
+      }
     </>
   );
 }
